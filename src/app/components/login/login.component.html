@@ -19,6 +19,7 @@
         <div class="form-group mp-5" style="margin-bottom: 30px">
           <div class="inputuser col-xs-12 mp-5">
             <input
+              [(ngModel)]="admin.username"
               class="form-control"
               type="email"
               id="txtUsername"
@@ -43,6 +44,7 @@
           </div>
           <div class="inputpass col-xs-12">
             <input
+              [(ngModel)]="admin.password"
               class="form-control"
               type="password"
               id="txtPassword"

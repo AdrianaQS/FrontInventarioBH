@@ -1,25 +1,31 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  //Objeto admin para obtener las credenciales
+  admin = {
+    username: '',
+    password: '',
+  };
 
-  constructor( 
-    // private aut: AuthService,
-  ) {
+  constructor(private authService: AuthService, private router: Router) {} // private aut: AuthService,
 
-  }
- 
-
-  ngOnInit() {
-
-   }
+  ngOnInit() {}
 
   logIn() {
-    console.log('que fue');
+    //console.log(this.admin);
+    this.authService.singin(this.admin).subscribe((res: any) => {
+      console.log(res);
+      //Guardamos el token dentro del LocalStorage
+      localStorage.setItem('token', res.token); //nombreItem,valor
+      //Nos envias al panel principal
+      this.router.navigate(['dashboard']); //Nombre asignado en el app-routing.module.ts
+    });
   }
-
 }

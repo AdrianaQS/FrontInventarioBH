@@ -1,76 +1,78 @@
 <link href="https://fonts.googleapis.com/css?family=Arapey" rel="stylesheet" />
-<section class="login-register">
-  <div class="leftside">
-    <div>
-      <img class="logo col-xs-12" src="./assets/img/logo.png" />
-      <div class="inventary-1 col-xs-12">
-        Brama Hermanos S.A.C.
-        <div class="line-1 col-xs-12"></div>
-        <div class="inventary-2 col-xs-12">
-          "Sistema de Control de Inventario"
+<body>
+  <section class="login-register">
+    <div class="leftside">
+      <div>
+        <img class="logo col-xs-12" src="./assets/img/logo.png" />
+        <div class="inventary-1 col-xs-12">
+          Brama Hermanos S.A.C.
+          <div class="line-1 col-xs-12"></div>
+          <div class="inventary-2 col-xs-12">
+            "Sistema de Control de Inventario"
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="login-box">
-    <div class="login-card">
-      <form class="login-form">
-        <div class="d-title">Inicio de Sesión</div>
-        <div class="form-group mp-5" style="margin-bottom: 30px">
-          <div class="inputuser col-xs-12 mp-5">
-            <input
-              [(ngModel)]="admin.username"
-              class="form-control"
-              type="email"
-              id="txtUsername"
-              placeholder="Nombre de usuario"
-              name="email"
-              required
-            />
-            <svg
-              class="iconuser"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 640 512"
-            >
-              <path
-                d="M224 256c70.7 0 128-57.31 128-128S294.7 0 224 0C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3c-95.73 0-173.3 77.6-173.3 173.3C0 496.5 15.52 512 34.66 512H413.3C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304zM479.1 320h-73.85C451.2 357.7 480 414.1 480 477.3C480 490.1 476.2 501.9 470 512h138C625.7 512 640 497.6 640 479.1C640 391.6 568.4 320 479.1 320zM432 256C493.9 256 544 205.9 544 144S493.9 32 432 32c-25.11 0-48.04 8.555-66.72 22.51C376.8 76.63 384 101.4 384 128c0 35.52-11.93 68.14-31.59 94.71C372.7 243.2 400.8 256 432 256z"
+    <div class="login-box">
+      <div class="login-card">
+        <form class="login-form">
+          <div class="d-title">Inicio de Sesión</div>
+          <div class="form-group mp-5" style="margin-bottom: 30px">
+            <div class="inputuser col-xs-12 mp-5">
+              <input
+                [(ngModel)]="admin.username"
+                class="form-control"
+                type="email"
+                id="txtUsername"
+                placeholder="Nombre de usuario"
+                name="email"
+                required
               />
-            </svg>
+              <svg
+                class="iconuser"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 640 512"
+              >
+                <path
+                  d="M224 256c70.7 0 128-57.31 128-128S294.7 0 224 0C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3c-95.73 0-173.3 77.6-173.3 173.3C0 496.5 15.52 512 34.66 512H413.3C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304zM479.1 320h-73.85C451.2 357.7 480 414.1 480 477.3C480 490.1 476.2 501.9 470 512h138C625.7 512 640 497.6 640 479.1C640 391.6 568.4 320 479.1 320zM432 256C493.9 256 544 205.9 544 144S493.9 32 432 32c-25.11 0-48.04 8.555-66.72 22.51C376.8 76.63 384 101.4 384 128c0 35.52-11.93 68.14-31.59 94.71C372.7 243.2 400.8 256 432 256z"
+                />
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="form-group" style="margin-bottom: 30px">
-          <div class="forgot">
-            <a class="forgot" href="/dashboard"> ¿Olvidaste tu contraseña? </a>
-          </div>
-          <div class="inputpass col-xs-12">
-            <input
-              [(ngModel)]="admin.password"
-              class="form-control"
-              type="password"
-              id="txtPassword"
-              placeholder="Contraseña"
-              name="password"
-              required
-            />
-            <svg
-              class="iconpass"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
-              <path
-                d="M80 192V144C80 64.47 144.5 0 224 0C303.5 0 368 64.47 368 144V192H384C419.3 192 448 220.7 448 256V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V256C0 220.7 28.65 192 64 192H80zM144 192H304V144C304 99.82 268.2 64 224 64C179.8 64 144 99.82 144 144V192z"
+          <div class="form-group" style="margin-bottom: 30px">
+            <div class="forgot">
+              <a class="forgot" href="/dashboard"> ¿Olvidaste tu contraseña? </a>
+            </div>
+            <div class="inputpass col-xs-12">
+              <input
+                [(ngModel)]="admin.password"
+                class="form-control"
+                type="password"
+                id="txtPassword"
+                placeholder="Contraseña"
+                name="password"
+                required
               />
-            </svg>
+              <svg
+                class="iconpass"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  d="M80 192V144C80 64.47 144.5 0 224 0C303.5 0 368 64.47 368 144V192H384C419.3 192 448 220.7 448 256V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V256C0 220.7 28.65 192 64 192H80zM144 192H304V144C304 99.82 268.2 64 224 64C179.8 64 144 99.82 144 144V192z"
+                />
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-12">
-            <button type="button" class="btn btn-dark" (click)="logIn()">
-              INGRESAR
-            </button>
+          <div class="form-group">
+            <div class="col-xs-12">
+              <button type="button" class="btn btn-dark" (click)="logIn()">
+                INGRESAR
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</body>

@@ -10,9 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 //Providers
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SidenavComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

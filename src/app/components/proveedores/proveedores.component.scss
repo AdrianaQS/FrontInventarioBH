@@ -1,13 +1,17 @@
-.container{
-    background-color: black;
-}
-
 h1{
-    color: white;
+    margin: 20px;
+    text-align: center;
+    text-justify: center;
+    align-items: center;
+    color: black;
+  }
+.container{
+    padding: 4 rem;
+    position: center;
+    font-family: "Roboto", sans-serif;
 }
-
 .table{
-    background-color:white;
+    //background-color:white;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -58,4 +62,9 @@ th:last-child {
 
 .btn{
     margin: 5px;
+}
+.accion{
+    outline: none;
+    border: none;
+    background-color: transparent;
 }

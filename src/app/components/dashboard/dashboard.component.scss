@@ -1,31 +1,39 @@
-.h1{
-    text-align: center;
-    text-justify: center;
-    align-items: center;
-    color: white;
+h1{
+  margin: 20px;
+  text-align: center;
+  text-justify: center;
+  align-items: center;
+  color: black;
 }
-.logo {
-    width: 30%;
-    position: relative;
+.row {
+  grid-column-gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  .card {
+    //display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    margin: 1.25rem 0 1.25rem 0;
+    box-shadow: 0 0.25rem 0.5rem #e6edef;
+    align-items: center;
+
+    .card-head {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #edf1f7;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .card-body {
+      padding: 1rem 1.5rem;
+    }
   }
 
-  .inventary-1 {
-    color: white;
-    font-family: "Arapey";
-    font-size: 60px;
+  .icon{
+    width:10rem;
+    height:10rem;
   }
-
-  .line-1 {
-    width: 570px;
-    border-top: 3px solid white;
-    padding: 0;
-  }
-
-  .inventary-2 {
-    color: white;
-    font-family: "Arapey";
-    font-size: 25px;
-  }
-.fondo{
-    background-color:black;
 }

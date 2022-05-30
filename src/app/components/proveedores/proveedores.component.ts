@@ -37,14 +37,13 @@ export class ProveedoresComponent implements OnInit {
     Swal.fire({
       title: 'Estas seguro de eliminar?',
       showDenyButton: true,
-      showCancelButton: true,
       confirmButtonText: 'Si',
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire('Eliminado', '', 'success')
       } else if (result.isDenied) {
-        Swal.fire('No se Elimino', '', 'error')
+        Swal.fire('', '', 'error')
       }
     })  
   }

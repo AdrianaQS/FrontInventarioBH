@@ -13,11 +13,11 @@ export class InsumosComponent implements OnInit {
   nameInsumo = '';
   idInsumo = 0;
   insumoForm = new FormGroup({
-    nombreInsumo: new FormControl(''),
-    descripcion: new FormControl(''),
-    stock: new FormControl(''),
-    costo: new FormControl(''),
-    idCategoria: new FormControl(''),
+    nombreInsumo: new FormControl('', [Validators.required]),
+    descripcion: new FormControl('', [Validators.required]),
+    stock: new FormControl('', [Validators.required]),
+    costo: new FormControl('', [Validators.required]),
+    idCategoria: new FormControl('', [Validators.required]),
   });
   modalRef!: BsModalRef;
 
@@ -29,6 +29,7 @@ export class InsumosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInsumos();
+    this.limpiarFormulario();
   }
 
   getInsumos() {
@@ -38,6 +39,7 @@ export class InsumosComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>, insumo: any, $event: any) {
+    this.limpiarFormulario();
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
   }
@@ -45,16 +47,18 @@ export class InsumosComponent implements OnInit {
   enviarFormulario() {
     if (this.insumoForm.valid) {
       const request = {
-        nombreInsumo: this.insumoForm.value.inputName,
+        nombreInsumo: this.insumoForm.value.nombreInsumo,
         descripcion: this.insumoForm.value.descripcion,
-        stock: this.insumoForm.value.stock,
-        costo: this.insumoForm.value.costo,
-        idCategoria: this.insumoForm.value.idCategoria,
+        stock: parseInt(this.insumoForm.value.stock),
+        costo: parseInt(this.insumoForm.value.costo),
+        idCategoria: parseInt(this.insumoForm.value.idCategoria),
       };
       this.insumoService.insertInsumo(request).subscribe((res: any) => {
         this.getInsumos();
         this.modalRef.hide();
       });
+    } else {
+      window.alert('Error en el formulario');
     }
   }
 
@@ -72,27 +76,41 @@ export class InsumosComponent implements OnInit {
     })
   }
 
+  limpiarFormulario() {
+    this.insumoForm.setValue({
+      nombreInsumo: '',
+      descripcion: '',
+      stock: '',
+      costo: '',
+      idCategoria: '',
+    })
+  }
+
   editarInsumo() {
     if (this.insumoForm.valid) {
       const request = {
-        nombreinsumo: this.insumoForm.value.inputName,
-        ruc: this.insumoForm.value.inputRuc,
-        telefono: this.insumoForm.value.inputDirecion,
-        ciudad: this.insumoForm.value.inputCiudad,
-        direccion: this.insumoForm.value.inputDirecion,
+        nombreinsumo: this.insumoForm.value.nombreInsumo,
+        descripcion: this.insumoForm.value.descripcion,
+        stock: parseInt(this.insumoForm.value.stock),
+        costo: parseInt(this.insumoForm.value.costo),
+        idCategoria: parseInt(this.insumoForm.value.idCategoria),
       };
       const id = this.idInsumo;
       this.insumoService.updateInsumo(request, id).subscribe((res: any) => {
         this.getInsumos();
         this.modalRef.hide();
         this.idInsumo = 0;
+        this.limpiarFormulario();
       });
+    } else {
+      window.alert('Error en el formulario');
     }
   }
 
 
   modalEliminacion(template: TemplateRef<any>, insumo: any, $event: any) {
-    this.idInsumo = insumo.idinsumo;
+    this.nameInsumo = insumo.nombreInsumo;
+    this.idInsumo = insumo.idInsumo;
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, RendererFactory2, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -13,11 +13,11 @@ export class ProveedoresComponent implements OnInit {
   nameProveedor = '';
   idProveedor = 0;
   proveedorForm = new FormGroup({
-    inputName: new FormControl(''),
-    inputRuc: new FormControl(''),
-    inputTelefono: new FormControl(''),
-    inputDirecion: new FormControl(''),
-    inputCiudad: new FormControl(''),
+    inputName: new FormControl('', [Validators.required]),
+    inputRuc: new FormControl('', [Validators.required]),
+    inputTelefono: new FormControl('', [Validators.required]),
+    inputDirecion: new FormControl('', [Validators.required]),
+    inputCiudad: new FormControl('', [Validators.required]),
   });
   modalRef!: BsModalRef;
 
@@ -39,7 +39,18 @@ export class ProveedoresComponent implements OnInit {
 
   openModal(template: TemplateRef<any>, proveedor: any, $event: any) {
     $event && $event.stopPropagation();
+    this.limpiarFormulario();
     this.modalRef = this.modalService.show(template);
+  }
+
+  limpiarFormulario() {
+    this.proveedorForm.setValue({
+      inputName: '',
+      inputRuc: '',
+      inputTelefono: '',
+      inputDirecion: '',
+      inputCiudad: '',
+    })
   }
 
   enviarFormulario() {
@@ -55,6 +66,8 @@ export class ProveedoresComponent implements OnInit {
         this.getProveedores();
         this.modalRef.hide();
       });
+    } else {
+      window.alert('Error en el formulario');
     }
   }
 
@@ -87,6 +100,8 @@ export class ProveedoresComponent implements OnInit {
         this.modalRef.hide();
         this.idProveedor = 0;
       });
+    } else {
+      window.alert('Error en el formulario');
     }
   }
 

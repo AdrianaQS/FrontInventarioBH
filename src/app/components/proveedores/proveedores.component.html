@@ -60,20 +60,24 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="proveedorForm">
-      <input formControlName="inputName" class="swal2-input" placeholder="Nombre">
+      <label>Ingrese el nombre:</label>
+      <input formControlName="inputName" maxlength="70" minlength="2" class="form-control" placeholder="Nombre">
       <br>
-      <input formControlName="inputRuc" class="swal2-input" placeholder="ruc">
+      <label>Ingrese el ruc:</label>
+      <input formControlName="inputRuc"  maxlength="20" class="form-control" placeholder="ruc">
       <br>
-      <input formControlName="inputTelefono" class="swal2-input" placeholder="telefono">
+      <label>Ingrese el telefono:</label>
+      <input formControlName="inputTelefono"  maxlength="9" class="form-control" placeholder="telefono">
       <br>
-      <input formControlName="inputDirecion" class="swal2-input" placeholder="direccion">
+      <label>Ingrese la direccion:</label>
+      <input formControlName="inputDirecion" maxlength="70" class="form-control" placeholder="direccion">
       <br>
-      <input formControlName="inputCiudad" class="swal2-input" placeholder="ciudad">
+      <label>Ingrese la ciudad:</label>
+      <input formControlName="inputCiudad"  maxlength="100" class="form-control" placeholder="ciudad">
     </form>
 
   </div>
   <div class="modal-footer">
-
     <button type="button" class="btn btn-primary btnDialogWhite" (click)="enviarFormulario()">
       Guardar
     </button>
@@ -92,20 +96,24 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="proveedorForm">
-      <input formControlName="inputName" class="swal2-input" placeholder="Nombre">
+      <label>Ingrese el nombre:</label>
+      <input formControlName="inputName" maxlength="70" minlength="2" class="form-control" placeholder="Nombre">
       <br>
-      <input formControlName="inputRuc" class="swal2-input" placeholder="ruc">
+      <label>Ingrese el ruc:</label>
+      <input formControlName="inputRuc" maxlength="20" class="form-control" placeholder="ruc">
       <br>
-      <input formControlName="inputTelefono" class="swal2-input" placeholder="telefono">
+      <label>Ingrese el telefono:</label>
+      <input formControlName="inputTelefono" maxlength="9" class="form-control" placeholder="telefono">
       <br>
-      <input formControlName="inputDirecion" class="swal2-input" placeholder="direccion">
+      <label>Ingrese la direccion:</label>
+      <input formControlName="inputDirecion" minlength="2"  maxlength="70" class="form-control" placeholder="direccion">
       <br>
-      <input formControlName="inputCiudad" class="swal2-input" placeholder="ciudad">
+      <label>Ingrese la ciudad:</label>
+      <input formControlName="inputCiudad" maxlength="100" class="form-control" placeholder="ciudad">
     </form>
 
   </div>
   <div class="modal-footer">
-
     <button type="button" class="btn btn-primary btnDialogWhite" (click)="editarProveedor()">
       Guardar
     </button>

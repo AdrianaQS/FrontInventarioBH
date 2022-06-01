@@ -6,7 +6,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { InsumosComponent } from './components/insumos/insumos.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-//?import { LoginComponent } from './components/login/login.component';
+import { ViewPrincipalComponent } from './components/view-principal/view-principal.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const APP_ROUTES: Routes = [
   {
@@ -14,41 +15,21 @@ export const APP_ROUTES: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
-
   {
     path: 'login',
-    //?component: LoginComponent,
     loadChildren: () =>
       import('./components/login/login.module').then((mod) => mod.LoginModule),
   },
-
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard], //Proviene del auth.guard.ts
-  },
-
-  {
-    path: 'proveedores',
-    component: ProveedoresComponent,
-    canActivate: [AuthGuard], //Proviene del auth.guard.ts
-  },
-
-  {
-    path: 'insumos',
-    component: InsumosComponent,
-    canActivate: [AuthGuard], //Proviene del auth.guard.ts
-  },
-
-  {
-    path: 'sidenav',
-    component: SidenavComponent,
-    canActivate: [AuthGuard], //Proviene del auth.guard.ts
-  },
-
-  {
-    path: '**',
-    component: NotfoundComponent,
+    path: 'inventario',
+    component: ViewPrincipalComponent,
+    children: [
+      // { path: '', redirectTo: 'login', pathMatch: 'full' },
+      // { path: 'login', component: LoginComponent },
+      { path: 'tablero-principal', component: DashboardComponent },
+      { path: 'proveedor', component: ProveedoresComponent },
+      { path: 'insumos', component: InsumosComponent },
+    ]
   },
 ];
 
@@ -56,4 +37,4 @@ export const APP_ROUTES: Routes = [
   imports: [RouterModule.forRoot(APP_ROUTES)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
+import { Component, OnInit, RendererFactory2, TemplateRef } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProveedorService } from 'src/app/services/proveedor.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-proveedores',
@@ -7,45 +9,104 @@ import Swal from 'sweetalert2';
   styleUrls: ['./proveedores.component.scss']
 })
 export class ProveedoresComponent implements OnInit {
-  
-  constructor() { }
+
+  nameProveedor = '';
+  idProveedor = 0;
+  proveedorForm = new FormGroup({
+    inputName: new FormControl(''),
+    inputRuc: new FormControl(''),
+    inputTelefono: new FormControl(''),
+    inputDirecion: new FormControl(''),
+    inputCiudad: new FormControl(''),
+  });
+  modalRef!: BsModalRef;
+
+  arrayProveedores: any;
+  constructor(
+    private proveedorService: ProveedorService,
+    private modalService: BsModalService,
+  ) { }
 
   ngOnInit(): void {
+    this.getProveedores();
   }
-  title = 'sweetAlert';
-  showModal(){
-    Swal.fire({
-      title: 'Añadir Proveedor',
-      html:
-        '<label></label>Nombre:</label><br/><input id="swal-input1" class="swal2-input" placeholder="Nombre"><br/>' +
-        '<br/><label>Ruc:</label><br/><input id="swal-input2" class="swal2-input" placeholder="Ruc"><br/>'+
-        '<br/><label>Teléfono:</label><br/><input id="swal-input2" class="swal2-input" placeholder="Teléfono"><br/>'+
-        '<br/><label>Ciudad:</label><br/><input id="swal-input2" class="swal2-input" placeholder="Ciudad"><br/>'+
-        '<br/><label>Dirección:</label><br/><input id="swal-input2" class="swal2-input" placeholder="Dirección">',
-      focusConfirm: false,
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success')
-      }
+
+  getProveedores() {
+    this.proveedorService.getProveedores().subscribe((res: any) => {
+      this.arrayProveedores = res;
+    });
+  }
+
+  openModal(template: TemplateRef<any>, proveedor: any, $event: any) {
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
+
+  enviarFormulario() {
+    if (this.proveedorForm.valid) {
+      const request = {
+        nombreProveedor: this.proveedorForm.value.inputName,
+        ruc: this.proveedorForm.value.inputRuc,
+        telefono: this.proveedorForm.value.inputDirecion,
+        ciudad: this.proveedorForm.value.inputCiudad,
+        direccion: this.proveedorForm.value.inputDirecion,
+      };
+      this.proveedorService.postProveedor(request).subscribe((res: any) => {
+        this.getProveedores();
+        this.modalRef.hide();
+      });
+    }
+  }
+
+  modalEdicion(template: TemplateRef<any>, proveedor: any, $event: any) {
+    this.nameProveedor = proveedor.nombreProveedor;
+    this.idProveedor = proveedor.idProveedor;
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+    this.proveedorForm.setValue({
+      inputName: proveedor.nombreProveedor,
+      inputRuc: proveedor.ruc,
+      inputTelefono: proveedor.telefono,
+      inputDirecion: proveedor.direccion,
+      inputCiudad: proveedor.ciudad,
     })
-  
   }
-  DelModal(){
-    Swal.fire({
-      title: 'Estas seguro de eliminar?',
-      showDenyButton: true,
-      confirmButtonText: 'Si',
-      denyButtonText: `No`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Eliminado', '', 'success')
-      } else if (result.isDenied) {
-        Swal.fire('', '', 'error')
-      }
-    })  
+
+  editarProveedor() {
+    if (this.proveedorForm.valid) {
+      const request = {
+        nombreProveedor: this.proveedorForm.value.inputName,
+        ruc: this.proveedorForm.value.inputRuc,
+        telefono: this.proveedorForm.value.inputDirecion,
+        ciudad: this.proveedorForm.value.inputCiudad,
+        direccion: this.proveedorForm.value.inputDirecion,
+      };
+      const id = this.idProveedor;
+      this.proveedorService.updateProveedor(request, id).subscribe((res: any) => {
+        this.getProveedores();
+        this.modalRef.hide();
+        this.idProveedor = 0;
+      });
+    }
+  }
+
+
+  modalEliminacion(template: TemplateRef<any>, proveedor: any, $event: any) {
+    this.idProveedor = proveedor.idProveedor;
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
+
+  EliminarProveedor() {
+    const request = {
+      id: this.idProveedor
+    };
+    const id = this.idProveedor;
+    this.proveedorService.deleteProveedor(request, id).subscribe((res: any) => {
+      this.getProveedores();
+      this.modalRef.hide();
+      this.idProveedor = 0;
+    });
   }
 
 }

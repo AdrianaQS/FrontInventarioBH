@@ -1,4 +1,4 @@
-<p>sidenav works!</p>
+<!-- <p>sidenav works!</p> -->
 <div class="sidenav">
     <div class="logo-container">
         <i class="perfil bi bi-person-circle"></i>        
@@ -7,25 +7,25 @@
     <div class="logo-text">Name</div>
     <ul class="sidenav-nav">
         <li class="sidenav-nav-item">
-            <a href="/dashboard" class="sidenav-nav-link">
+            <a class="sidenav-nav-link">
                 <i class="sidenav-link-icon bi bi-house-door"></i>
-                <span class="sidenav-link-text">
+                <span class="sidenav-link-text" (click)="goToDashboard()" >
                     Dashboard
                 </span>
             </a>
         </li>
         <li class="sidenav-nav-item">
-            <a href="/proveedores" class="sidenav-nav-link">
+            <a class="sidenav-nav-link">
                 <i class="sidenav-link-icon bi bi-person-lines-fill"></i>
-                <span class="sidenav-link-text">
+                <span class="sidenav-link-text" (click)="goToProveedor()" >
                     Proveedores
                 </span>
             </a>
         </li>
         <li class="sidenav-nav-item">
-            <a href="/insumos" class="sidenav-nav-link">
+            <a class="sidenav-nav-link">
                 <i class="sidenav-link-icon bi bi-box2"></i>
-                <span class="sidenav-link-text">
+                <span class="sidenav-link-text" (click)="goToInsumo()" >
                     Insumos
                 </span>
             </a>

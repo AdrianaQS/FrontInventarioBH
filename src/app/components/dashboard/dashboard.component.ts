@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.welcomeTest();
+    //this.welcomeTest();
   }
 
   welcomeTest(): boolean {

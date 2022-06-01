@@ -9,7 +9,6 @@ import { InsumoService } from 'src/app/services/insumo.service';
   styleUrls: ['./insumos.component.scss'],
 })
 export class InsumosComponent implements OnInit {
-
   nameInsumo = '';
   idInsumo = 0;
   insumoForm = new FormGroup({
@@ -24,8 +23,8 @@ export class InsumosComponent implements OnInit {
   arrayInsumos: any;
   constructor(
     private insumoService: InsumoService,
-    private modalService: BsModalService,
-  ) { }
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     this.getInsumos();
@@ -73,7 +72,7 @@ export class InsumosComponent implements OnInit {
       stock: insumo.stock,
       costo: insumo.costo,
       idCategoria: insumo.idCategoria,
-    })
+    });
   }
 
   limpiarFormulario() {
@@ -83,16 +82,16 @@ export class InsumosComponent implements OnInit {
       stock: '',
       costo: '',
       idCategoria: '',
-    })
+    });
   }
 
   editarInsumo() {
     if (this.insumoForm.valid) {
       const request = {
-        nombreinsumo: this.insumoForm.value.nombreInsumo,
+        nombreInsumo: this.insumoForm.value.nombreInsumo,
         descripcion: this.insumoForm.value.descripcion,
         stock: parseInt(this.insumoForm.value.stock),
-        costo: parseInt(this.insumoForm.value.costo),
+        costo: parseFloat(this.insumoForm.value.costo),
         idCategoria: parseInt(this.insumoForm.value.idCategoria),
       };
       const id = this.idInsumo;
@@ -107,7 +106,6 @@ export class InsumosComponent implements OnInit {
     }
   }
 
-
   modalEliminacion(template: TemplateRef<any>, insumo: any, $event: any) {
     this.nameInsumo = insumo.nombreInsumo;
     this.idInsumo = insumo.idInsumo;
@@ -117,7 +115,7 @@ export class InsumosComponent implements OnInit {
 
   EliminarInsumo() {
     const request = {
-      id: this.idInsumo
+      id: this.idInsumo,
     };
     const id = this.idInsumo;
     this.insumoService.deleteInsumo(request, id).subscribe((res: any) => {
@@ -126,5 +124,4 @@ export class InsumosComponent implements OnInit {
       this.idInsumo = 0;
     });
   }
-
 }

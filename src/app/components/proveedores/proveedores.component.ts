@@ -58,7 +58,7 @@ export class ProveedoresComponent implements OnInit {
       const request = {
         nombreProveedor: this.proveedorForm.value.inputName,
         ruc: this.proveedorForm.value.inputRuc,
-        telefono: this.proveedorForm.value.inputDirecion,
+        telefono: this.proveedorForm.value.inputTelefono,
         ciudad: this.proveedorForm.value.inputCiudad,
         direccion: this.proveedorForm.value.inputDirecion,
       };
@@ -90,7 +90,7 @@ export class ProveedoresComponent implements OnInit {
       const request = {
         nombreProveedor: this.proveedorForm.value.inputName,
         ruc: this.proveedorForm.value.inputRuc,
-        telefono: this.proveedorForm.value.inputDirecion,
+        telefono: this.proveedorForm.value.inputTelefono,
         ciudad: this.proveedorForm.value.inputCiudad,
         direccion: this.proveedorForm.value.inputDirecion,
       };

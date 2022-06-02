@@ -89,7 +89,7 @@ export class InsumosComponent implements OnInit {
   editarInsumo() {
     if (this.insumoForm.valid) {
       const request = {
-        nombreinsumo: this.insumoForm.value.nombreInsumo,
+        nombreInsumo: this.insumoForm.value.nombreInsumo,
         descripcion: this.insumoForm.value.descripcion,
         stock: parseInt(this.insumoForm.value.stock),
         costo: parseInt(this.insumoForm.value.costo),

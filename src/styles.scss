@@ -12,3 +12,24 @@ body {
     position: relative;
     font-family: 'Roboto', sans-serif;
 }
+
+.modal {
+    .modal-header {
+        color: white;
+        background-color: #171b1d;
+    }
+
+    .modal-body {
+        font-size: 1.2em;
+        background-color: #EFEFEF;
+
+        input {
+            border-radius: 5px;
+            box-shadow: 5px black;
+        }
+    }
+
+    .modal-footer {
+        background-color: #EFEFEF;
+    }
+}

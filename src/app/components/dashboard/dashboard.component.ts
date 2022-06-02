@@ -14,7 +14,8 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.welcomeTest();
+    //this.welcomeTest();
+    //this.router.navigate(["/inventario/tablero-principal"])
   }
 
   welcomeTest(): boolean {

@@ -1,9 +1,17 @@
 .contenedor-principal {
   display: flex;
+  //background: url(../../../assets/img/fondo-A3.jpg); 
+  background-color: #EFEFEF;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 
   .content-views {
     display: flex;
+    background-color: #EFEFEF;
     justify-content: center;
     padding: 0% 17%;
+    border-radius: 3rem;
+    //box-shadow: 0.063rem 0 1.25rem 0 #000000;
   }
 }

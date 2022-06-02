@@ -44,9 +44,6 @@
           <td class="p-3">{{insumo.costo}}</td>
           <td class="p-3">{{insumo.idCategoria == 1? 'Metalico': 'No Metalico'}}</td>
           <td class="p-3">
-            {{ insumo.idCategoria == 1 ? "Metalico" : "No Metalico" }}
-          </td>
-          <td class="p-3">
             <button
               class="accion"
               (click)="modalEdicion(ModalEdicion, insumo, $event)"

@@ -8,6 +8,8 @@ import { InsumosComponent } from './components/insumos/insumos.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ViewPrincipalComponent } from './components/view-principal/view-principal.component';
 import { LoginComponent } from './components/login/login.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { EntradasComponent } from './components/entradas/entradas.component';
 
 export const APP_ROUTES: Routes = [
   {
@@ -29,6 +31,8 @@ export const APP_ROUTES: Routes = [
       { path: 'tablero-principal', component: DashboardComponent },
       { path: 'proveedor', component: ProveedoresComponent },
       { path: 'insumos', component: InsumosComponent },
+      { path: 'pedidos', component: PedidosComponent },
+      { path: 'entradas', component: EntradasComponent },
     ]
   },
 ];

@@ -32,6 +32,8 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { EntradasComponent } from './components/entradas/entradas.component';
 const COMPONENT = [
   SidenavComponent,
   ProveedoresComponent,
@@ -41,7 +43,7 @@ const COMPONENT = [
 ]
 
 @NgModule({
-  declarations: [...COMPONENT, ViewPrincipalComponent],
+  declarations: [...COMPONENT, ViewPrincipalComponent, PedidosComponent, EntradasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

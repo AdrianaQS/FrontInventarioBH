@@ -38,4 +38,12 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/inventario/insumos']);
   }
 
+  goToPedido() {
+    this.router.navigate(['/inventario/pedidos']);
+  }
+
+  goToEntrada() {
+    this.router.navigate(['/inventario/entradas']);
+  }
+
 }

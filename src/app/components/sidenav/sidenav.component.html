@@ -1,8 +1,6 @@
 <!-- <p>sidenav works!</p> -->
 <div class="sidenav">
-  <div class="logo-text1">
-    Brama Hermanos
-  </div>
+  <div class="logo-text1">Brama Hermanos</div>
   <div class="logo-container">
     <i class="perfil bi bi-person-circle"></i>
     <!--<h1>${decodedToken.nombreAdmin}</h1>-->
@@ -31,8 +29,21 @@
         <span class="sidenav-link-text" (click)="goToInsumo()"> Insumos </span>
       </a>
     </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link">
+        <i class="sidenav-link-icon bi bi-receipt"></i>
+        <span class="sidenav-link-text" (click)="goToPedidos()"> Pedidos </span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link">
+        <i class="sidenav-link-icon bi bi-box-arrow-in-up"></i>
+        <span class="sidenav-link-text" (click)="goToEntrada()"> Entradas</span>
+      </a>
+    </li>
+
+    <div class="close">
+      <a href="/login"><i class="close bi bi-box-arrow-left"></i></a>
+    </div>
   </ul>
-  <div class="close">
-    <a href="/login"><i class="close bi bi-box-arrow-left"></i></a>
-  </div>
 </div>

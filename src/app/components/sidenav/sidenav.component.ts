@@ -27,5 +27,12 @@ export class SidenavComponent implements OnInit {
   goToInsumo() {
     this.router.navigate(['/inventario/insumos']);
   }
+  goToPedidos() {
+    this.router.navigate(['/inventario/pedidos']);
+  }
+
+  goToEntrada() {
+    this.router.navigate(['/inventario/entradas']);
+  }
 
 }

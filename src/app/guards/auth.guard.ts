@@ -15,11 +15,10 @@ import { Router } from '@angular/router';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  //Funciona si no hay token o ya expiro del localStorage
   canActivate(): boolean {
     if (!this.authService.isAuth()) {
       console.log('El token ya expiro o no es valido');
-      this.router.navigate(['login']); //Retorna al login si no existe el token
+      this.router.navigate(['/login']);
       return false;
     }
     return true;

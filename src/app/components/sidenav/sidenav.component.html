@@ -3,7 +3,6 @@
   <div class="logo-text1">Brama Hermanos</div>
   <div class="logo-container">
     <i class="perfil bi bi-person-circle"></i>
-    <!--<h1>${decodedToken.nombreAdmin}</h1>-->
   </div>
   <div class="logo-text">{{ nameAdmin() }}</div>
   <ul class="sidenav-nav">
@@ -43,7 +42,9 @@
     </li>
 
     <div class="close">
-      <a href="/login"><i class="close bi bi-box-arrow-left"></i></a>
+      <a href="/login" (click)="removeToken()"
+        ><i class="close bi bi-box-arrow-left"></i
+      ></a>
     </div>
   </ul>
 </div>

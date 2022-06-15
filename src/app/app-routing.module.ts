@@ -28,12 +28,32 @@ export const APP_ROUTES: Routes = [
     children: [
       // { path: '', redirectTo: 'login', pathMatch: 'full' },
       // { path: 'login', component: LoginComponent },
-      { path: 'tablero-principal', component: DashboardComponent },
-      { path: 'proveedor', component: ProveedoresComponent },
-      { path: 'insumos', component: InsumosComponent },
-      { path: 'pedidos', component: PedidosComponent },
-      { path: 'entradas', component: EntradasComponent },
-    ]
+      {
+        path: 'tablero-principal',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'proveedor',
+        component: ProveedoresComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'insumos',
+        component: InsumosComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'pedidos',
+        component: PedidosComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'entradas',
+        component: EntradasComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
   },
 ];
 
@@ -41,4 +61,4 @@ export const APP_ROUTES: Routes = [
   imports: [RouterModule.forRoot(APP_ROUTES)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

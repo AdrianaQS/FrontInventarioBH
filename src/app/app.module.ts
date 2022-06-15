@@ -39,11 +39,14 @@ const COMPONENT = [
   ProveedoresComponent,
   AppComponent,
   InsumosComponent,
-  DashboardComponent
-]
+  DashboardComponent,
+  ViewPrincipalComponent,
+  PedidosComponent,
+  EntradasComponent,
+];
 
 @NgModule({
-  declarations: [...COMPONENT, ViewPrincipalComponent, PedidosComponent, EntradasComponent],
+  declarations: [...COMPONENT],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -64,14 +67,15 @@ const COMPONENT = [
     MdbScrollspyModule,
     MdbTabsModule,
     MdbTooltipModule,
-    MdbValidationModule, 
-    BrowserAnimationsModule,],
+    MdbValidationModule,
+    BrowserAnimationsModule,
+  ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    BsModalService
+    BsModalService,
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [...COMPONENT],
   bootstrap: [AppComponent],
 })

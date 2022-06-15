@@ -10,17 +10,20 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class SidenavComponent implements OnInit {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.nameAdmin();
-  }
+  ngOnInit(): void {}
 
-  nameAdmin(): boolean {
+  nameAdmin(): string {
     const token: any = localStorage.getItem('token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     const nameAdmin = decodedToken.nombreAdmin;
     //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
     return nameAdmin;
+  }
+
+  removeToken(): boolean {
+    const remove = localStorage.removeItem('token');
+    return true;
   }
 
   goToDashboard() {

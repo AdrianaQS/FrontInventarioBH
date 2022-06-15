@@ -5,15 +5,22 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-
-  constructor(
-    private router: Router
-  ) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.nameAdmin();
+  }
+
+  nameAdmin(): boolean {
+    const token: any = localStorage.getItem('token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    const nameAdmin = decodedToken.nombreAdmin;
+    //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
+    return nameAdmin;
   }
 
   goToDashboard() {
@@ -34,5 +41,4 @@ export class SidenavComponent implements OnInit {
   goToEntrada() {
     this.router.navigate(['/inventario/entradas']);
   }
-
 }

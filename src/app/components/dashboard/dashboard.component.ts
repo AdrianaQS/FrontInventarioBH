@@ -7,15 +7,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-
 export class DashboardComponent implements OnInit {
-  constructor(
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     //this.welcomeTest();
-    //this.router.navigate(["/inventario/tablero-principal"])
+    //this.router.navigate(['/inventario/tablero-principal']);
   }
 
   welcomeTest(): boolean {
@@ -45,5 +42,4 @@ export class DashboardComponent implements OnInit {
   goToEntrada() {
     this.router.navigate(['/inventario/entradas']);
   }
-
 }

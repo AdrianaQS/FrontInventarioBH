@@ -2,13 +2,23 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
   styleUrls: ['./pedidos.component.scss'],
 })
+
 export class PedidosComponent implements OnInit {
+  nameAdmin(): string {
+    const token: any = localStorage.getItem('token');
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    const nameAdmin = decodedToken.nombreAdmin;
+    //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
+    return nameAdmin;
+  }
   namePedido = '';
   idPedido = 0;
   pedidoForm = new FormGroup({

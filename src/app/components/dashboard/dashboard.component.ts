@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private router: Router) {}
+  modalRef!: BsModalRef;
+
+  constructor(private router: Router, private modalService: BsModalService) {}
 
   ngOnInit() {
     //this.welcomeTest();
@@ -41,5 +44,9 @@ export class DashboardComponent implements OnInit {
 
   goToEntrada() {
     this.router.navigate(['/inventario/entradas']);
+  }
+  openModal(template: TemplateRef<any>,dashboard: any, $event: any) {
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
   }
 }

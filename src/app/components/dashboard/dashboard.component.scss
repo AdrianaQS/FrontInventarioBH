@@ -42,3 +42,39 @@ h1{
     height:10rem;
   }
 }
+.table{
+  //background-color:white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+table { 
+  border-collapse: separate; 
+  border-spacing: 0 10px; 
+  margin-top: -10px; /* correct offset on first border spacing if desired */
+}
+
+td:first-child{
+  border-top-left-radius: 16px; 
+  border-bottom-left-radius: 16px;
+}
+
+td:last-child {
+  border-bottom-right-radius: 16px; 
+  border-top-right-radius: 16px; 
+}
+
+th:first-child {
+  border-radius: 16px 0 0 16px;
+}
+
+th:last-child {
+  border-radius: 0 16px 16px 0;
+}
+.close{
+  background-color: transparent;
+  color: white;
+  border: none;
+  width: 2rem;
+  font-size:2rem;
+}

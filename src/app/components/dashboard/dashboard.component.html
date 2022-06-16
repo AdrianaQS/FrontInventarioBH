@@ -40,7 +40,7 @@
     <div class="card col-3" style="width: 234px; height: 254.19px">
       <div class="card-body">
         <h4 class="card-head">CATEGORIAS</h4>
-        <a (click)="goToInsumo()">
+        <a (click)="openModal(ModalCategoria, '',$event)">
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -89,3 +89,50 @@
     </div>
   </div>
 </div>
+<ng-template #ModalCategoria>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Categorias</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col-12">
+      <table class="table table-active table-striped align-middle">
+        <thead class="align-middle">
+          <tr>
+            <td colspan="2" style="font-weight: bold;">CATEGORIAS</td>
+          </tr>
+          <tr>
+            <th class="p-3" scope="col">ID</th>
+            <th class="p-3" scope="col">Categoría</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td class="p-3">Metálico</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td class="p-3">No Metálico</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger btnDialogWhite"
+      (click)="modalRef.hide()"
+    >
+      Cerrar
+    </button>
+  </div>
+</ng-template>

@@ -11,6 +11,11 @@ export class EntradaService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   getEntradas() {
-    return this.http.get(`${this.API}/entradas/`);
+    return this.http.get(`${this.API}/entrada`);
   }
+
+  getDetallePedido(id: any) {
+    return this.http.get(`${this.API}/detallePedido/`+ id);
+  }
+
 }

@@ -10,12 +10,13 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class EntradasComponent implements OnInit {
   modalRef!: BsModalRef;
-
+  numeroPedido: any;
+  arrayDetalleEntrada: any;
   arrayEntradas: any;
   constructor(
     private entradaService: EntradaService,
     private modalService: BsModalService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getPedidos();
@@ -23,6 +24,7 @@ export class EntradasComponent implements OnInit {
 
   getPedidos() {
     this.entradaService.getEntradas().subscribe((res: any) => {
+      console.log(res, 'res')
       this.arrayEntradas = res;
     });
   }
@@ -30,5 +32,17 @@ export class EntradasComponent implements OnInit {
   openModal(template: TemplateRef<any>, insumo: any, $event: any) {
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
-  }  
+  }
+
+  openModalDetalle(template: TemplateRef<any>, entrada: any, $event: any) {
+    this.numeroPedido = entrada.idEntrada;
+
+    this.entradaService.getIdDetallePedido(this.numeroPedido).subscribe((res: any) => {
+      this.arrayDetalleEntrada = res;
+      console.log(res, 'res')
+    });
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
+
 }

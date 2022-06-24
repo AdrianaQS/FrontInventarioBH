@@ -11,11 +11,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 
 export class PedidosComponent implements OnInit {
+  idAdmin: any;
   nameAdmin(): string {
     const token: any = localStorage.getItem('token');
+
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     const nameAdmin = decodedToken.nombreAdmin;
+    this.idAdmin = decodedToken.idAdmin;
     //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
     return nameAdmin;
   }
@@ -24,28 +27,44 @@ export class PedidosComponent implements OnInit {
   pedidoForm = new FormGroup({
     idInsumo: new FormControl('', [Validators.required]),
     fechaPedido: new FormControl('', [Validators.required]),
-    idAdmin: new FormControl('', [Validators.required]),
+    idAdmin: new FormControl(''),
+    idProveedor: new FormControl('', [Validators.required]),
+    descripcion: new FormControl('', [Validators.required]),
+    cantInsumos: new FormControl('', [Validators.required]),
+  });
+
+  pedidoEditionForm = new FormGroup({
     idProveedor: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required]),
     totalInsumos: new FormControl('', [Validators.required]),
     costoPedido: new FormControl('', [Validators.required]),
   });
-  modalRef!: BsModalRef;
 
+  modalRef!: BsModalRef;
+  arrayDetallePedido: any;
   arrayPedidos: any;
+  numeroPedido: any;
   constructor(
     private pedidoService: PedidoService,
     private modalService: BsModalService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getPedidos();
     this.limpiarFormulario();
+    this.getPedidoU();
   }
 
   getPedidos() {
     this.pedidoService.getPedidos().subscribe((res: any) => {
       this.arrayPedidos = res;
+    });
+  }
+
+  getPedidoU() {
+    this.pedidoService.getPedidoU(1).subscribe((res: any) => {
+      // this.arrayPedidos = res;
+      console.log(this.arrayPedidos, 'lista pedidos');
     });
   }
 
@@ -55,17 +74,41 @@ export class PedidosComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  openModalDetalle(template: TemplateRef<any>, pedido: any, $event: any) {
+    this.numeroPedido = pedido.idPedido;
+
+    this.pedidoService.getDetallePedido(this.numeroPedido).subscribe((res: any) => {
+      this.arrayDetallePedido = res;
+    });
+    this.limpiarFormulario();
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalEdition(template: TemplateRef<any>, pedido: any, $event: any) {
+    this.pedidoEditionForm.setValue({
+      idProveedor: pedido.idProveedor,
+      descripcion: pedido.descripcion,
+      totalInsumos: pedido.totalInsumos,
+      costoPedido: pedido.costoPedido,
+    });
+    this.limpiarFormulario();
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
+
   enviarFormulario() {
+    console.log(this.pedidoForm);
     if (this.pedidoForm.valid) {
       const request = {
-        idInsumo: this.pedidoForm.value.idInsumo,
-        fechaPedido: this.pedidoForm.value.fechaPedido,
-        idAdmin: parseInt(this.pedidoForm.value.idAdmin),
+        idAdmin: parseInt(this.idAdmin),
         idProveedor: parseInt(this.pedidoForm.value.idProveedor),
-        descripcion: this.pedidoForm.value.descripcion,
-        totalInsumos: parseInt(this.pedidoForm.value.totalInsumos),
-        costoPedido: parseFloat(this.pedidoForm.value.costoPedido),
+        descripcion: 'test',
+        totalInsumos:12,
+        costoPedido: 12,
+        idEstado: 1,
       };
+      console.log(request, 'request');
       this.pedidoService.insertPedido(request).subscribe((res: any) => {
         this.getPedidos();
         this.modalRef.hide();
@@ -97,8 +140,7 @@ export class PedidosComponent implements OnInit {
       idAdmin: '',
       idProveedor: '',
       descripcion: '',
-      totalInsumos: '',
-      costoPedido: '',
+      cantInsumos: '',
     });
   }
 
@@ -126,7 +168,7 @@ export class PedidosComponent implements OnInit {
   }
 
   modalEliminacion(template: TemplateRef<any>, pedido: any, $event: any) {
-    this.namePedido = pedido.namePedido;
+    this.namePedido = pedido.idPedido;
     this.idPedido = pedido.idPedido;
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);

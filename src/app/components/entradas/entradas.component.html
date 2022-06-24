@@ -22,17 +22,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td class="p-3">1-1-1</td>
-          <td class="p-3">1-1-1</td>
-          <td class="p-3">will</td>
-          <td class="p-3">will sac</td>
-          <td class="p-3">$ 1000</td>
+        <tr *ngFor="let entrada of arrayEntradas">
+          <th scope="row">{{entrada.idEntrada}}</th>
+          <td scope="row">{{entrada.fechaPedido | date:'shortDate'}}</td>
+          <td scope="row">{{entrada.fechaEntrada | date:'shortDate'}}</td>
+          <td scope="row">{{entrada.administrador}}</td>
+          <td scope="row">{{entrada.nombreProveedor}}</td>
+          <td scope="row">S/. {{entrada.valorEntrada | number}}</td>
           <td class="p-3">
             <button
               class="accion"
-              (click)="openModal(ModalRegistro, '', $event)"
+              (click)="openModalDetalle(ModalRegistro, entrada, $event)"
             >
               <svg
                 class="view-detail"
@@ -74,18 +74,12 @@
           </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="p-3">Hierro</th>
-          <td class="p-3">35.00</td>
-          <td class="p-3">1000</td>
-          <td class="p-3">35000.00</td>
-         </tr>
-         <tr>
-          <th scope="p-3">Arrabio</th>
-          <td class="p-3">35.00</td>
-          <td class="p-3">1000</td>
-          <td class="p-3">35000.00</td>
-         </tr>
+        <tr *ngFor="let entrada of arrayDetalleEntrada">
+          <td scope="p-3">{{entrada.nombreInsumo}}</td>
+          <td scope="p-3">S/. {{entrada.costoInsumo | number}}</td>
+          <td scope="p-3">{{entrada.cantidadPedido}}</td>
+          <td scope="p-3">S/. {{entrada.costoDetalle | number}}</td>
+        </tr>
       </tbody>
     </table>
   </div>

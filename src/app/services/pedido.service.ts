@@ -11,18 +11,26 @@ export class PedidoService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   getPedidos() {
-    return this.http.get(`${this.API}/pedidos/`);
+    return this.http.get(`${this.API}/pedido`);
+  }
+
+  getPedidoU(id: any) {
+    return this.http.get(`${this.API}/pedido/`+ id);
+  }
+
+  getDetallePedido(id: any) {
+    return this.http.get(`${this.API}/detallePedido/`+ id);
   }
 
   insertPedido(request: any) {
-    return this.http.post(`${this.API}/pedidos/`, request);
+    return this.http.post(`${this.API}/pedido/`, request);
   }
 
   deletePedido(request: any, id: any) {
-    return this.http.delete(`${this.API}/pedidos/`+ id, request);
+    return this.http.delete(`${this.API}/pedido/`+ id, request);
   }
 
   updatePedido(request: any, id: any) {
-    return this.http.put(`${this.API}/pedidos/`+ id, request);
+    return this.http.put(`${this.API}/pedido/`+ id, request);
   }
 }

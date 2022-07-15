@@ -33,4 +33,8 @@ export class PedidoService {
   updatePedido(request: any, id: any) {
     return this.http.put(`${this.API}/pedido/`+ id, request);
   }
+
+  recibirPedidoRegistrarEntrada(request: any) {
+    return this.http.post(`${this.API}/pedido/recibirPedido`, request);
+  }
 }

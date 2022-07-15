@@ -1,8 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { InsumoService } from 'src/app/services/insumo.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -11,7 +12,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 
 export class PedidosComponent implements OnInit {
+  saveUsername: boolean = false;
+  disableCheckbox: boolean  = false;
+
   idAdmin: any;
+  arrayInsumos: any;
+  pedidoForm: FormGroup;
+  pedidoEditionForm: FormGroup;
   nameAdmin(): string {
     const token: any = localStorage.getItem('token');
 
@@ -24,21 +31,6 @@ export class PedidosComponent implements OnInit {
   }
   namePedido = '';
   idPedido = 0;
-  pedidoForm = new FormGroup({
-    idInsumo: new FormControl('', [Validators.required]),
-    fechaPedido: new FormControl('', [Validators.required]),
-    idAdmin: new FormControl(''),
-    idProveedor: new FormControl('', [Validators.required]),
-    descripcion: new FormControl('', [Validators.required]),
-    cantInsumos: new FormControl('', [Validators.required]),
-  });
-
-  pedidoEditionForm = new FormGroup({
-    idProveedor: new FormControl('', [Validators.required]),
-    descripcion: new FormControl('', [Validators.required]),
-    totalInsumos: new FormControl('', [Validators.required]),
-    costoPedido: new FormControl('', [Validators.required]),
-  });
 
   modalRef!: BsModalRef;
   arrayDetallePedido: any;
@@ -46,13 +38,42 @@ export class PedidosComponent implements OnInit {
   numeroPedido: any;
   constructor(
     private pedidoService: PedidoService,
-    private modalService: BsModalService
-  ) { }
+    private modalService: BsModalService,
+    private fb: FormBuilder,
+    private insumoService: InsumoService,
+  ) {
+    this.disableCheckbox = true;
+    this.pedidoForm = new FormGroup({
+      idInsumo: new FormControl('', [Validators.required]),
+      fechaPedido: new FormControl('', [Validators.required]),
+      idAdmin: new FormControl(''),
+      idProveedor: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required]),
+      cantInsumos: new FormControl('', [Validators.required]),
+      insumos: this.fb.array([this.fb.group({ insumo: [], cantidad: [] })])
+    });
+
+    this.pedidoEditionForm = new FormGroup({
+      idProveedor: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required]),
+      totalInsumos: new FormControl('', [Validators.required]),
+      costoPedido: new FormControl('', [Validators.required]),
+    });
+
+  }
 
   ngOnInit(): void {
     this.getPedidos();
     this.limpiarFormulario();
     this.getPedidoU();
+    this.getListaInsumos();
+  }
+
+  getListaInsumos() {
+    this.insumoService.getInsumos().subscribe((res: any) => {
+      this.arrayInsumos = res;
+      console.log(this.arrayInsumos, 'lista insumos');
+    });
   }
 
   getPedidos() {
@@ -60,6 +81,22 @@ export class PedidosComponent implements OnInit {
       this.arrayPedidos = res;
     });
   }
+
+  get getInsumos() {
+    return this.pedidoForm.get('insumos') as FormArray;
+  }
+
+  addInsumos() {
+    const control = <FormArray>this.pedidoForm.controls['insumos'];
+    control.push(this.fb.group({ insumo: [], cantidad: [] }));
+  }
+
+  removeInsumo(index: number) {
+    const control = <FormArray>this.pedidoForm.controls['insumos'];
+    control.removeAt(index);
+  }
+
+
 
   getPedidoU() {
     this.pedidoService.getPedidoU(1).subscribe((res: any) => {
@@ -104,7 +141,7 @@ export class PedidosComponent implements OnInit {
         idAdmin: parseInt(this.idAdmin),
         idProveedor: parseInt(this.pedidoForm.value.idProveedor),
         descripcion: 'test',
-        totalInsumos:12,
+        totalInsumos: 12,
         costoPedido: 12,
         idEstado: 1,
       };
@@ -134,6 +171,8 @@ export class PedidosComponent implements OnInit {
   }
 
   limpiarFormulario() {
+    const control = <FormArray>this.pedidoForm.controls['insumos'];
+    control.removeAt(1);
     this.pedidoForm.setValue({
       idInsumo: '',
       fechaPedido: '',
@@ -141,6 +180,10 @@ export class PedidosComponent implements OnInit {
       idProveedor: '',
       descripcion: '',
       cantInsumos: '',
+      insumos: [{
+        insumo: [],
+        cantidad: []
+      }]
     });
   }
 
@@ -183,6 +226,15 @@ export class PedidosComponent implements OnInit {
       this.getPedidos();
       this.modalRef.hide();
       this.idPedido = 0;
+    });
+  }
+
+  cambiosSwitch(pedido: any) {
+    const request = {
+      idPedido: pedido.idPedido
+    }
+    this.pedidoService.recibirPedidoRegistrarEntrada(pedido).subscribe((res: any) => {
+      this.getPedidos();
     });
   }
 }

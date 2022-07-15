@@ -37,9 +37,8 @@ export class EntradasComponent implements OnInit {
   openModalDetalle(template: TemplateRef<any>, entrada: any, $event: any) {
     this.numeroPedido = entrada.idEntrada;
 
-    this.entradaService.getIdDetallePedido(this.numeroPedido).subscribe((res: any) => {
+    this.entradaService.getDetallePedido(this.numeroPedido).subscribe((res: any) => {
       this.arrayDetalleEntrada = res;
-      console.log(res, 'res')
     });
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);

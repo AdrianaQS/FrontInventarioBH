@@ -23,12 +23,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let entrada of arrayEntradas">
-          <th scope="row">{{entrada.idEntrada}}</th>
-          <td scope="row">{{entrada.fechaPedido | date:'shortDate'}}</td>
-          <td scope="row">{{entrada.fechaEntrada | date:'shortDate'}}</td>
-          <td scope="row">{{entrada.administrador}}</td>
-          <td scope="row">{{entrada.nombreProveedor}}</td>
-          <td scope="row">S/. {{entrada.valorEntrada | number}}</td>
+          <th scope="row">{{ entrada.idEntrada }}</th>
+          <td scope="row">{{ entrada.fechaPedido | date: "shortDate" }}</td>
+          <td scope="row">{{ entrada.fechaEntrada | date: "shortDate" }}</td>
+          <td scope="row">{{ entrada.administrador }}</td>
+          <td scope="row">{{ entrada.nombreProveedor }}</td>
+          <td scope="row">S/. {{ entrada.valorEntrada | number }}</td>
           <td class="p-3">
             <button
               class="accion"
@@ -71,17 +71,24 @@
           <th class="p-3" scope="col">Costo Insumo</th>
           <th class="p-3" scope="col">Cantidad Pedido</th>
           <th class="p-3" scope="col">Costo Detalle</th>
-          </tr>
+        </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let entrada of arrayDetalleEntrada">
-          <td scope="p-3">{{entrada.nombreInsumo}}</td>
-          <td scope="p-3">S/. {{entrada.costoInsumo | number}}</td>
-          <td scope="p-3">{{entrada.cantidadPedido}}</td>
-          <td scope="p-3">S/. {{entrada.costoDetalle | number}}</td>
+        <tr
+          *ngFor="
+            let entrada of arrayDetalleEntrada
+              | paginate: { itemsPerPage: 5, currentPage: page }
+          "
+        >
+          <td scope="p-3">{{ entrada.nombreInsumo }}</td>
+          <td scope="p-3">S/. {{ entrada.costoInsumo | number }}</td>
+          <td scope="p-3">{{ entrada.cantidadPedido }}</td>
+          <td scope="p-3">S/. {{ entrada.costoDetalle | number }}</td>
         </tr>
       </tbody>
     </table>
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior"
+    nextLabel="Siguiente"></pagination-controls>
   </div>
   <div class="modal-footer">
     <button

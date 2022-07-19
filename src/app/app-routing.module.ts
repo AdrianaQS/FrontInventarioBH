@@ -10,6 +10,7 @@ import { ViewPrincipalComponent } from './components/view-principal/view-princip
 import { LoginComponent } from './components/login/login.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { EntradasComponent } from './components/entradas/entradas.component';
+import { SalidasComponent } from './components/salidas/salidas.component';
 
 export const APP_ROUTES: Routes = [
   {
@@ -51,6 +52,12 @@ export const APP_ROUTES: Routes = [
       {
         path: 'entradas',
         component: EntradasComponent,
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: 'salidas',
+        component: SalidasComponent,
         canActivate: [AuthGuard],
       },
     ],

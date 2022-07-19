@@ -13,6 +13,7 @@ export class EntradasComponent implements OnInit {
   numeroPedido: any;
   arrayDetalleEntrada: any;
   arrayEntradas: any;
+  public page: any;
   constructor(
     private entradaService: EntradaService,
     private modalService: BsModalService
@@ -37,9 +38,16 @@ export class EntradasComponent implements OnInit {
   openModalDetalle(template: TemplateRef<any>, entrada: any, $event: any) {
     this.numeroPedido = entrada.idEntrada;
 
+<<<<<<< Updated upstream
     this.entradaService.getDetallePedido(this.numeroPedido).subscribe((res: any) => {
       this.arrayDetalleEntrada = res;
     });
+=======
+    /*this.entradaService.getIdDetallePedido(this.numeroPedido).subscribe((res: any) => {
+      this.arrayDetalleEntrada = res;
+      console.log(res, 'res')
+    });*/
+>>>>>>> Stashed changes
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
   }

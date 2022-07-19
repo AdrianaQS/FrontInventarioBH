@@ -45,6 +45,10 @@ export class DashboardComponent implements OnInit {
   goToEntrada() {
     this.router.navigate(['/inventario/entradas']);
   }
+
+  goToSalida() {
+    this.router.navigate(['/inventario/salidas']);
+  }
   openModal(template: TemplateRef<any>,dashboard: any, $event: any) {
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);

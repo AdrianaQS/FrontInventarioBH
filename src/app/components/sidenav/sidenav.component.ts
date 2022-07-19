@@ -44,4 +44,8 @@ export class SidenavComponent implements OnInit {
   goToEntrada() {
     this.router.navigate(['/inventario/entradas']);
   }
+
+  goToSalida() {
+    this.router.navigate(['/inventario/salidas']);
+  }
 }

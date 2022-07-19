@@ -34,6 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { EntradasComponent } from './components/entradas/entradas.component';
+import { SalidasComponent } from './components/salidas/salidas.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 const COMPONENT = [
   SidenavComponent,
   ProveedoresComponent,
@@ -46,7 +48,7 @@ const COMPONENT = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENT],
+  declarations: [...COMPONENT, SalidasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -69,6 +71,7 @@ const COMPONENT = [
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

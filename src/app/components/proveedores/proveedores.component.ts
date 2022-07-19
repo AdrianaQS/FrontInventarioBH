@@ -22,6 +22,7 @@ export class ProveedoresComponent implements OnInit {
   modalRef!: BsModalRef;
 
   arrayProveedores: any;
+  public page: any;
   constructor(
     private proveedorService: ProveedorService,
     private modalService: BsModalService,

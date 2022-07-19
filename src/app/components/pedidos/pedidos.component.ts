@@ -3,7 +3,11 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { PedidoService } from 'src/app/services/pedido.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { JwtHelperService } from '@auth0/angular-jwt';
+<<<<<<< Updated upstream
 import { InsumoService } from 'src/app/services/insumo.service';
+=======
+import {NgxPaginationModule} from 'ngx-pagination';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-pedidos',
@@ -11,10 +15,14 @@ import { InsumoService } from 'src/app/services/insumo.service';
   styleUrls: ['./pedidos.component.scss'],
 })
 
+<<<<<<< Updated upstream
 export class PedidosComponent implements OnInit {
   saveUsername: boolean = false;
   disableCheckbox: boolean  = false;
 
+=======
+export class PedidosComponent implements OnInit {  
+>>>>>>> Stashed changes
   idAdmin: any;
   arrayInsumos: any;
   pedidoForm: FormGroup;
@@ -36,6 +44,7 @@ export class PedidosComponent implements OnInit {
   arrayDetallePedido: any;
   arrayPedidos: any;
   numeroPedido: any;
+  public page: any;
   constructor(
     private pedidoService: PedidoService,
     private modalService: BsModalService,

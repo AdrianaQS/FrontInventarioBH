@@ -48,6 +48,12 @@ th:last-child {
     outline: none;
     border: none;
     background-color: transparent;
+    .file{
+        fill: rgb(0, 0, 0); 
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+    } 
 }
 .close{
     background-color: transparent;

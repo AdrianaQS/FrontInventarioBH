@@ -19,7 +19,7 @@ export class InsumosComponent implements OnInit {
     idCategoria: new FormControl('', [Validators.required]),
   });
   modalRef!: BsModalRef;
-
+  public page: any;
   arrayInsumos: any;
   constructor(
     private insumoService: InsumoService,

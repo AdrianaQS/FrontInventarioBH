@@ -14,6 +14,10 @@ export class SalidaService {
     return this.http.get(`${this.API}/salida`);
   }
 
+  getDetalleSalida(id: any) {
+    return this.http.get(`${this.API}/detalleSalida/`+ id);
+  }
+
   insertSalida(request: any) {
     return this.http.post(`${this.API}/salida/`, request);
   }
@@ -25,9 +29,5 @@ export class SalidaService {
   updateSalida(request: any, id: any) {
     return this.http.put(`${this.API}/salida/`+ id, request);
   }
-
-  /* getDetallePedido(id: any) {
-    return this.http.get(`${this.API}/detallePedido/`+ id);
-  } */
 
 }

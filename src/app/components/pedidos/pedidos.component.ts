@@ -127,8 +127,6 @@ export class PedidosComponent implements OnInit {
   }
 
   openModalEdition(template: TemplateRef<any>, pedido: any, $event: any) {
-    console.log(this.idPedido, ' this.idPedido');
-    console.log(pedido, 'pedido')
     this.idPedido = pedido.idPedido;
     this.pedidoEditionForm.setValue({
       idProveedor: pedido.idProveedor,
@@ -252,7 +250,7 @@ export class PedidosComponent implements OnInit {
     const request = {
       idPedido: pedido.idPedido
     }
-    this.pedidoService.recibirPedidoRegistrarEntrada(pedido).subscribe((res: any) => {
+    this.pedidoService.recibirPedidoRegistrarEntrada(request).subscribe((res: any) => {
       this.getPedidos();
     });
   }

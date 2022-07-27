@@ -1,36 +1,20 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
 <div class="container">
   <div>
     <h1>Salidas</h1>
   </div>
   <br />
   <div class="col">
-    <button
-      class="btn btn-primary"
-      (click)="openModal(ModalRegistro, '', $event)"
-    >
-      Añadir<svg
-        class="plus"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 512 512"
-      >
+    <button class="btn btn-primary" (click)="openModal(ModalRegistro, '', $event)">
+      Añadir<svg class="plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path
-          d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM256 368C269.3 368 280 357.3 280 344V280H344C357.3 280 368 269.3 368 256C368 242.7 357.3 232 344 232H280V168C280 154.7 269.3 144 256 144C242.7 144 232 154.7 232 168V232H168C154.7 232 144 242.7 144 256C144 269.3 154.7 280 168 280H232V344C232 357.3 242.7 368 256 368z"
-        />
+          d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM256 368C269.3 368 280 357.3 280 344V280H344C357.3 280 368 269.3 368 256C368 242.7 357.3 232 344 232H280V168C280 154.7 269.3 144 256 144C242.7 144 232 154.7 232 168V232H168C154.7 232 144 242.7 144 256C144 269.3 154.7 280 168 280H232V344C232 357.3 242.7 368 256 368z" />
       </svg>
     </button>
     <button class="m-1 btn btn-danger">
-      Reporte<svg
-        class="reporte"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 384 512"
-      >
+      Reporte<svg class="reporte" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
         <path
-          d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM272 416h-160C103.2 416 96 408.8 96 400C96 391.2 103.2 384 112 384h160c8.836 0 16 7.162 16 16C288 408.8 280.8 416 272 416zM272 352h-160C103.2 352 96 344.8 96 336C96 327.2 103.2 320 112 320h160c8.836 0 16 7.162 16 16C288 344.8 280.8 352 272 352zM288 272C288 280.8 280.8 288 272 288h-160C103.2 288 96 280.8 96 272C96 263.2 103.2 256 112 256h160C280.8 256 288 263.2 288 272z"
-        />
+          d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM272 416h-160C103.2 416 96 408.8 96 400C96 391.2 103.2 384 112 384h160c8.836 0 16 7.162 16 16C288 408.8 280.8 416 272 416zM272 352h-160C103.2 352 96 344.8 96 336C96 327.2 103.2 320 112 320h160c8.836 0 16 7.162 16 16C288 344.8 280.8 352 272 352zM288 272C288 280.8 280.8 288 272 288h-160C103.2 288 96 280.8 96 272C96 263.2 103.2 256 112 256h160C280.8 256 288 263.2 288 272z" />
       </svg>
     </button>
   </div>
@@ -50,204 +34,131 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="
+        <tr *ngFor="
             let salida of arraySalidas
               | paginate: { itemsPerPage: 5, currentPage: page }
-          "
-        >
-          <th scope="row">11</th>
-          <td scope="row">William Chávez</td>
-          <td scope="row">Acero VCL</td>
-          <td scope="row">06-07-2022</td>
-          <td scope="row">2</td>
-          <td scope="row">S/. 1000</td>
+          ">
+          <th scope="row">{{salida.idSalida}}</th>
+          <th scope="row">{{salida.nombreAdmin}}</th>
+          <th scope="row">{{salida.nombreManufactura}}</th>
+          <td scope="row">{{salida.fecha}}</td>
+          <td scope="row"> {{salida.cantidadInsumos}}</td>
+          <td scope="row">S/. {{salida.costoSalida}}</td>
           <td class="p-3">
             <button class="accion" title="Ver Detalle">
-              <svg
-                class="view-detail"
-                (click)="openModalDetalle(ModalVerDetalle, salida, $event)"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
+              <svg class="view-detail" (click)="openModalDetalle(ModalVerDetalle, salida, $event)"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path
-                  d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z"
-                />
+                  d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z" />
               </svg>
             </button>
           </td>
           <td class="p-3">
             <button class="accion" title="Editar">
-              <svg
-                class="edit"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
+              <svg class="edit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path
-                  d="M490.3 40.4C512.2 62.27 512.2 97.73 490.3 119.6L460.3 149.7L362.3 51.72L392.4 21.66C414.3-.2135 449.7-.2135 471.6 21.66L490.3 40.4zM172.4 241.7L339.7 74.34L437.7 172.3L270.3 339.6C264.2 345.8 256.7 350.4 248.4 353.2L159.6 382.8C150.1 385.6 141.5 383.4 135 376.1C128.6 370.5 126.4 361 129.2 352.4L158.8 263.6C161.6 255.3 166.2 247.8 172.4 241.7V241.7zM192 63.1C209.7 63.1 224 78.33 224 95.1C224 113.7 209.7 127.1 192 127.1H96C78.33 127.1 64 142.3 64 159.1V416C64 433.7 78.33 448 96 448H352C369.7 448 384 433.7 384 416V319.1C384 302.3 398.3 287.1 416 287.1C433.7 287.1 448 302.3 448 319.1V416C448 469 405 512 352 512H96C42.98 512 0 469 0 416V159.1C0 106.1 42.98 63.1 96 63.1H192z"
-                />
+                  d="M490.3 40.4C512.2 62.27 512.2 97.73 490.3 119.6L460.3 149.7L362.3 51.72L392.4 21.66C414.3-.2135 449.7-.2135 471.6 21.66L490.3 40.4zM172.4 241.7L339.7 74.34L437.7 172.3L270.3 339.6C264.2 345.8 256.7 350.4 248.4 353.2L159.6 382.8C150.1 385.6 141.5 383.4 135 376.1C128.6 370.5 126.4 361 129.2 352.4L158.8 263.6C161.6 255.3 166.2 247.8 172.4 241.7V241.7zM192 63.1C209.7 63.1 224 78.33 224 95.1C224 113.7 209.7 127.1 192 127.1H96C78.33 127.1 64 142.3 64 159.1V416C64 433.7 78.33 448 96 448H352C369.7 448 384 433.7 384 416V319.1C384 302.3 398.3 287.1 416 287.1C433.7 287.1 448 302.3 448 319.1V416C448 469 405 512 352 512H96C42.98 512 0 469 0 416V159.1C0 106.1 42.98 63.1 96 63.1H192z" />
               </svg>
             </button>
             <button class="accion" title="Eliminar">
-              <svg
-                class="del"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-              >
+              <svg class="del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path
-                  d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM31.1 128H416V448C416 483.3 387.3 512 352 512H95.1C60.65 512 31.1 483.3 31.1 448V128zM111.1 208V432C111.1 440.8 119.2 448 127.1 448C136.8 448 143.1 440.8 143.1 432V208C143.1 199.2 136.8 192 127.1 192C119.2 192 111.1 199.2 111.1 208zM207.1 208V432C207.1 440.8 215.2 448 223.1 448C232.8 448 240 440.8 240 432V208C240 199.2 232.8 192 223.1 192C215.2 192 207.1 199.2 207.1 208zM304 208V432C304 440.8 311.2 448 320 448C328.8 448 336 440.8 336 432V208C336 199.2 328.8 192 320 192C311.2 192 304 199.2 304 208z"
-                />
+                  d="M135.2 17.69C140.6 6.848 151.7 0 163.8 0H284.2C296.3 0 307.4 6.848 312.8 17.69L320 32H416C433.7 32 448 46.33 448 64C448 81.67 433.7 96 416 96H32C14.33 96 0 81.67 0 64C0 46.33 14.33 32 32 32H128L135.2 17.69zM31.1 128H416V448C416 483.3 387.3 512 352 512H95.1C60.65 512 31.1 483.3 31.1 448V128zM111.1 208V432C111.1 440.8 119.2 448 127.1 448C136.8 448 143.1 440.8 143.1 432V208C143.1 199.2 136.8 192 127.1 192C119.2 192 111.1 199.2 111.1 208zM207.1 208V432C207.1 440.8 215.2 448 223.1 448C232.8 448 240 440.8 240 432V208C240 199.2 232.8 192 223.1 192C215.2 192 207.1 199.2 207.1 208zM304 208V432C304 440.8 311.2 448 320 448C328.8 448 336 440.8 336 432V208C336 199.2 328.8 192 320 192C311.2 192 304 199.2 304 208z" />
               </svg>
             </button>
             <button class="accion" title="Descargar PDF">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="bi bi-file-pdf file"
-                viewBox="0 0 16 16"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-file-pdf file" viewBox="0 0 16 16">
                 <path
-                  d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"
-                />
+                  d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
                 <path
-                  d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"
-                />
+                  d="M4.603 12.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.701 19.701 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.716 5.716 0 0 1-.911-.95 11.642 11.642 0 0 0-1.997.406 11.311 11.311 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.27.27 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.647 12.647 0 0 1 1.01-.193 11.666 11.666 0 0 1-.51-.858 20.741 20.741 0 0 1-.5 1.05zm2.446.45c.15.162.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.881 3.881 0 0 0-.612-.053zM8.078 5.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z" />
               </svg>
             </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <pagination-controls
-      (pageChange)="page = $event"
-      previousLabel="Anterior"
-      nextLabel="Siguiente"
-    ></pagination-controls>
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+    </pagination-controls>
   </div>
 </div>
 
 <ng-template #ModalRegistro>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Añadir Salidas</h4>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form [formGroup]="salidaForm">
-      <label>Id Salidas:</label>
-      <input
-        formControlName="idsalida"
-        class="form-control"
-        placeholder=""
-        readonly="readonly"
-      />
       <br />
       <label>Administrador:</label>
-      <input
-        class="form-control"
-        formControlName="idAdmin"
-        placeholder="{{ nameAdmin() }}"
-        readonly="readonly"
-        value="{{ nameAdmin() }}"
-      />
+      <input class="form-control" formControlName="idAdmin" placeholder="{{ nameAdmin() }}" readonly="readonly"
+        value="{{ nameAdmin() }}" />
       <br />
       <label>Seleccione la Manufactura:</label>
-      <select
-        class="form-control"
-        formControlName="idManufactura"
-        placeholder="Selecione la Manufactura"
-      >
+      <select class="form-control" formControlName="idManufactura" placeholder="Selecione la Manufactura">
         <option value="">Elija una opción...</option>
-        <option value="1">Acero VCL</option>
-        <option value="2">Acero H13</option>
-        <option value="3">Acero Inoxidable</option>
-        <option value="4">Acero de Aleacion</option>
-        <option value="5">Acero Galvanizado</option>
-        <option value="6">Acero Laminado</option>
-        <option value="7">Acero Corrugado</option>
+        <option value="Acero VCL">Acero VCL</option>
+        <option value="Acero H13">Acero H13</option>
+        <option value="Acero Inoxidable">Acero Inoxidable</option>
+        <option value="Acero de Aleacion">Acero de Aleacion</option>
+        <option value="Acero Galvanizado">Acero Galvanizado</option>
+        <option value="Acero Laminado">Acero Laminado</option>
+        <option value="Acero Corrugado">Acero Corrugado</option>
       </select>
       <br />
       <div class="form-group">
-        <div formArrayName="insumos">
-          <div
-            *ngFor="let item of getInsumos.controls; let pointIndex = index"
-            [formGroupName]="pointIndex"
-            placeholder="Seleccione insumo"
-          >
-            <label class="">Seleccione el Insumo:</label>
-            <select
-              class="form-control"
-              formControlName="insumo"
-              placeholder="Selecione el Insumo"
-            >
-              <option value="">Elija una opción...</option>
-              <option
-                *ngFor="let insu of arrayInsumos"
-                value="{{ insu.idInsumo }}"
-              >
-                {{ insu.nombreInsumo }}
-              </option>
-            </select>
-            <label>Cantidad:</label>
-            <input
-              formControlName="cantidad"
-              class="form-control"
-              placeholder="Cantidad"
-            />
+        <div formArrayName="insumos" class="row" style="margin-bottom: 20px;">
+          <div *ngFor="let item of getInsumos.controls; let pointIndex = index" [formGroupName]="pointIndex"
+            placeholder="Seleccione insumo" style="display: flex; justify-content: space-between">
+            <div class="row col-5">
+              <label style="font-size: 16px;">Seleccione el Insumo:</label>
+              <select class="form-control" formControlName="insumo" placeholder="Selecione el Insumo">
+                <option value="">Elija una opción...</option>
+                <option *ngFor="let insu of arrayInsumos" value="{{ insu.nombreInsumo }}">
+                  {{ insu.nombreInsumo }}
+                </option>
+              </select>
+            </div>
+            <div class="row col-2">
+              <label style="font-size: 16px;">Cantidad:</label>
+              <input formControlName="cantidad" class="form-control" placeholder="Cantidad" />
+            </div>
+            <div class="row col-2">
+              <label style="font-size: 16px;">Costo:</label>
+              <input formControlName="costo" class="form-control" type="number" placeholder="Costo" value="" />
+            </div>
+            <div class="row  col-3" style="padding:20px 0px 0px 0px;">
+              <button type="button" class="btn btn-success btnDialogWhite" (click)="removeInsumo(pointIndex)">
+                eliminar
+              </button>
+            </div>
 
-            <button
-              type="button"
-              class="btn btn-success btnDialogWhite"
-              (click)="removeInsumo(pointIndex)"
-            >
-              eliminar
-            </button>
           </div>
         </div>
       </div>
-      <button
-        type="button"
-        class="btn btn-success btnDialogWhite"
-        (click)="addInsumos()"
-      >
+
+      <button type="button" class="btn btn-success btnDialogWhite" (click)="addInsumos()">
         Agregar otro insumo
       </button>
-      <br />
-      <label>Total de Insumos:</label>
-      <input
-        formControlName="totalinsumos"
-        class="form-control"
-        placeholder="2"
-      />
-      <br />
-      <br />
-      <label>Costo de Salidas</label>
-      <input
-        formControlName="costosalida"
-        class="form-control"
-        placeholder="S/00.00"
-      />
-      <br />
+
+      <div>
+        <br>
+        <label>Cantidad total de insumos: </label> {{totalCantidadPedido}}
+      </div>
+      <div>
+        <br>
+        <label>Total costo del pedido: </label> {{totalPedido}}
+      </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btnDialogWhite"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="btn btn-secondary btnDialogWhite" (click)="modalRef.hide()">
       Cancelar
     </button>
-    <button
-      type="button"
-      class="btn btn-primary btnDialogWhite"
-      (click)="enviarFormulario()"
-    >
+    <button type="button" class="btn btn-primary btnDialogWhite" (click)="enviarFormulario()">
       Guardar
     </button>
   </div>
@@ -256,31 +167,17 @@
 <ng-template #ModalEdicion>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Editar Salidas</h4>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form [formGroup]="salidaEditionForm">
       <label>Administrador:</label>
-      <input
-        class="form-control"
-        placeholder="{{ nameAdmin() }}"
-        readonly="readonly"
-        value="{{ nameAdmin() }}"
-      />
+      <input class="form-control" placeholder="{{ nameAdmin() }}" readonly="readonly" value="{{ nameAdmin() }}" />
       <br />
       <label>Seleccione la Manufactura:</label>
-      <select
-        class="form-control"
-        formControlName="idManufactura"
-        placeholder="Selecione la Manufactura"
-      >
+      <select class="form-control" formControlName="idManufactura" placeholder="Selecione la Manufactura">
         <option value="">Elija una opción...</option>
         <option value="1">Acero VCL</option>
         <option value="2">Acero H13</option>
@@ -292,37 +189,19 @@
       </select>
       <br />
       <label>Total de Insumos:</label>
-      <input
-        formControlName="totalinsumos"
-        class="form-control"
-        readonly="readonly"
-        placeholder="2"
-      />
+      <input formControlName="totalinsumos" class="form-control" readonly="readonly" placeholder="2" />
       <br />
       <br />
       <label>Costo de Salidas</label>
-      <input
-        formControlName="costosalida"
-        class="form-control"
-        readonly="readonly"
-        placeholder="S/00.00"
-      />
+      <input formControlName="costosalida" class="form-control" readonly="readonly" placeholder="S/00.00" />
       <br />
     </form>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btnDialogWhite"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="btn btn-secondary btnDialogWhite" (click)="modalRef.hide()">
       Cancelar
     </button>
-    <button
-      type="button"
-      class="btn btn-primary btnDialogWhite"
-      (click)="editarSalida()"
-    >
+    <button type="button" class="btn btn-primary btnDialogWhite" (click)="editarSalida()">
       Guardar
     </button>
   </div>
@@ -331,32 +210,18 @@
 <ng-template #ModalEliminacion>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Eliminar Salida</h4>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    ¿Esta seguro de eliminar la Salida <strong>{{ nameSalida }}</strong
-    >?
+    ¿Esta seguro de eliminar la Salida <strong>{{ nameSalida }}</strong>?
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btnDialogWhite"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="btn btn-secondary btnDialogWhite" (click)="modalRef.hide()">
       Cancelar
     </button>
-    <button
-      type="button"
-      class="btn btn-primary btnDialogWhite"
-      (click)="eliminarSalida()"
-    >
+    <button type="button" class="btn btn-primary btnDialogWhite" (click)="eliminarSalida()">
       Eliminar
     </button>
   </div>
@@ -364,12 +229,7 @@
 <ng-template #ModalVerDetalle>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Detalle Salidas</h4>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -389,7 +249,7 @@
           <tr *ngFor="let pedido of arrayDetalleSalida">
             <td scope="p-3">{{ pedido.nombreInsumo }}</td>
             <td scope="p-3">S/. {{ pedido.costoInsumo | number }}</td>
-            <td scope="p-3">{{ pedido.cantidadPedido }}</td>
+            <td scope="p-3">{{ pedido.cantidadSalida }}</td>
             <td scope="p-3">S/. {{ pedido.costoDetalle | number }}</td>
           </tr>
         </tbody>
@@ -397,11 +257,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-danger btnDialogWhite"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="btn btn-danger btnDialogWhite" (click)="modalRef.hide()">
       Cerrar
     </button>
   </div>

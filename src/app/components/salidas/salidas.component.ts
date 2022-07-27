@@ -16,11 +16,12 @@ export class SalidasComponent implements OnInit {
   arrayInsumos: any;
   salidaForm: FormGroup;
   salidaEditionForm: FormGroup;
+  nameAdministrador = '';
   nameAdmin(): string {
     const token: any = localStorage.getItem('token');
-
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
+    this.nameAdministrador = decodedToken.nombreAdmin;
     const nameAdmin = decodedToken.nombreAdmin;
     this.idAdmin = decodedToken.idAdmin;
     //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
@@ -28,36 +29,49 @@ export class SalidasComponent implements OnInit {
   }
   nameSalida = '';
   idSalida = 0;
-  
+
   modalRef!: BsModalRef;
   numeroSalida: any;
   arrayDetalleSalida: any;
-  arraySalidas: any;  
+  arraySalidas: any;
   public page: any;
+
+  totalPedido: number;
+  totalCantidadPedido: number;
   constructor(
     private salidaService: SalidaService,
-    private modalService: BsModalService,    
+    private modalService: BsModalService,
     private insumoService: InsumoService,
     private fb: FormBuilder,
-   ) {
+  ) {
+
+    this.totalPedido = 0;
+    this.totalCantidadPedido = 0;
     this.salidaForm = new FormGroup({
-      idInsumo: new FormControl('', [Validators.required]),
+      idsalida: new FormControl(''),
+      idInsumo: new FormControl(''),
       idManufactura: new FormControl('', [Validators.required]),
       idAdmin: new FormControl(''),
-      cantInsumos: new FormControl('', [Validators.required]),
-      insumos: this.fb.array([this.fb.group({ insumo: [], cantidad: [] })])
+      insumos: this.fb.array([this.fb.group({ insumo: [], cantidad: [], costo: [] })])
     });
 
     this.salidaEditionForm = new FormGroup({
       idManufactura: new FormControl('', [Validators.required]),
     });
-   }
+  }
 
-  ngOnInit(): void { 
-    this.getSalidas();    
+  ngOnInit(): void {
+    this.getSalidas();
     this.limpiarFormulario();
-    this.getListaInsumos();    
+    this.getListaInsumos();
 
+  }
+
+  getSalidas() {
+    this.salidaService.getSalidas().subscribe((res: any) => {
+      this.arraySalidas = res;
+      console.log(this.arraySalidas, 'lista getSalidas');
+    });
   }
 
   getListaInsumos() {
@@ -67,11 +81,7 @@ export class SalidasComponent implements OnInit {
     });
   }
 
-  getSalidas() {
-    this.salidaService.getSalidas().subscribe((res: any) => {
-      this.arraySalidas = res;
-    });
-  }
+
 
   get getInsumos() {
     return this.salidaForm.get('insumos') as FormArray;
@@ -80,17 +90,34 @@ export class SalidasComponent implements OnInit {
   addInsumos() {
     const control = <FormArray>this.salidaForm.controls['insumos'];
     control.push(this.fb.group({ insumo: [], cantidad: [] }));
+    this.totalCantidadYcostoInsumos();
   }
 
   removeInsumo(index: number) {
     const control = <FormArray>this.salidaForm.controls['insumos'];
     control.removeAt(index);
+    this.totalCantidadYcostoInsumos();
   }
 
   openModal(template: TemplateRef<any>, insumo: any, $event: any) {
     this.limpiarFormulario();
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
+  }
+
+  totalCantidadYcostoInsumos() {
+    let totalCostoDeInsumo = 0;
+    let totalDeCantidadPedido = 0;
+    this.salidaForm.value.insumos.forEach((value: any) => {
+      if (value.costo !== null) {
+        totalCostoDeInsumo += parseInt(value.costo);
+      }
+      if (value.cantidad !== null) {
+        totalDeCantidadPedido += parseInt(value.cantidad);
+      }
+    });
+    this.totalPedido = totalCostoDeInsumo;
+    this.totalCantidadPedido = totalDeCantidadPedido;
   }
 
   openModalDetalle(template: TemplateRef<any>, salida: any, $event: any) {
@@ -117,15 +144,14 @@ export class SalidasComponent implements OnInit {
   }
 
   enviarFormulario() {
-    console.log(this.salidaForm);
     if (this.salidaForm.valid) {
+      this.totalCantidadYcostoInsumos();
       const request = {
-        idAdmin: parseInt(this.idAdmin),
-        idManufactura: parseInt(this.salidaForm.value.idManufactura),
-        totalInsumos: 12,
-        costoSalida: 12,
+        administrador: this.nameAdministrador,
+        manufactura: this.salidaForm.value.idManufactura,
+        totalInsumos: this.totalCantidadPedido,
+        costoSalida: this.totalPedido ,
       };
-      console.log(request, 'request');
       this.salidaService.insertSalida(request).subscribe((res: any) => {
         this.getSalidas();
         this.modalRef.hide();
@@ -138,17 +164,6 @@ export class SalidasComponent implements OnInit {
   limpiarFormulario() {
     const control = <FormArray>this.salidaForm.controls['insumos'];
     control.removeAt(1);
-    this.salidaForm.setValue({
-      idInsumo: '',
-      idAdmin: '',
-      idManufactura: '',
-      fechaSalida: '',
-      cantInsumos: '',
-      insumos: [{
-        insumo: [],
-        cantidad: []
-      }]
-    });
   }
 
   editarSalida() {

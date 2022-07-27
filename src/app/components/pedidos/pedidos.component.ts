@@ -13,18 +13,21 @@ import { InsumoService } from 'src/app/services/insumo.service';
 
 export class PedidosComponent implements OnInit {
   saveUsername: boolean = false;
-  disableCheckbox: boolean  = false;
-
+  disableCheckbox: boolean = false;
+  nameAdministrador: any;
   idAdmin: any;
   arrayInsumos: any;
   pedidoForm: FormGroup;
   pedidoEditionForm: FormGroup;
+  totalPedido: number;
+  totalCantidadPedido: number;
   nameAdmin(): string {
     const token: any = localStorage.getItem('token');
 
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     const nameAdmin = decodedToken.nombreAdmin;
+    this.nameAdministrador = decodedToken.nombreAdmin;
     this.idAdmin = decodedToken.idAdmin;
     //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
     return nameAdmin;
@@ -43,15 +46,14 @@ export class PedidosComponent implements OnInit {
     private fb: FormBuilder,
     private insumoService: InsumoService,
   ) {
+    this.totalPedido = 0;
     this.disableCheckbox = true;
+    this.totalCantidadPedido = 0;
     this.pedidoForm = new FormGroup({
-      idInsumo: new FormControl('', [Validators.required]),
-      fechaPedido: new FormControl('', [Validators.required]),
       idAdmin: new FormControl(''),
       idProveedor: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
-      cantInsumos: new FormControl('', [Validators.required]),
-      insumos: this.fb.array([this.fb.group({ insumo: [], cantidad: [] })])
+      insumos: this.fb.array([this.fb.group({ insumo: [], cantidad: [], costo: [] })])
     });
 
     this.pedidoEditionForm = new FormGroup({
@@ -73,7 +75,6 @@ export class PedidosComponent implements OnInit {
   getListaInsumos() {
     this.insumoService.getInsumos().subscribe((res: any) => {
       this.arrayInsumos = res;
-      console.log(this.arrayInsumos, 'lista insumos');
     });
   }
 
@@ -89,12 +90,14 @@ export class PedidosComponent implements OnInit {
 
   addInsumos() {
     const control = <FormArray>this.pedidoForm.controls['insumos'];
-    control.push(this.fb.group({ insumo: [], cantidad: [] }));
+    control.push(this.fb.group({ insumo: [], cantidad: [], costo: [] }));
+    this.totalCantidadYcostoInsumos();
   }
 
   removeInsumo(index: number) {
     const control = <FormArray>this.pedidoForm.controls['insumos'];
     control.removeAt(index);
+    this.totalCantidadYcostoInsumos();
   }
 
 
@@ -135,18 +138,34 @@ export class PedidosComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  totalCantidadYcostoInsumos() {
+    let totalCostoDeInsumo = 0;
+    let totalDeCantidadPedido = 0;
+    this.pedidoForm.value.insumos.forEach((value: any) => {
+      if (value.costo !== null) {
+        totalCostoDeInsumo += parseInt(value.costo);
+      }
+      if (value.cantidad !== null) {
+        totalDeCantidadPedido += parseInt(value.cantidad);
+      }
+    });
+    this.totalPedido = totalCostoDeInsumo;
+    this.totalCantidadPedido = totalDeCantidadPedido;
+  }
+
   enviarFormulario() {
-    console.log(this.pedidoForm);
+    console.log(this.pedidoForm, 'this.pedidoForm.')
+    console.log(this.pedidoForm.valid, 'valido?')
     if (this.pedidoForm.valid) {
+
+      this.totalCantidadYcostoInsumos();
       const request = {
-        idAdmin: parseInt(this.idAdmin),
-        idProveedor: parseInt(this.pedidoForm.value.idProveedor),
-        descripcion: 'test',
-        totalInsumos: 12,
-        costoPedido: 12,
-        idEstado: 1,
+        administrador: this.nameAdministrador,
+        proveedor: this.pedidoForm.value.idProveedor,
+        descripcion: this.pedidoForm.value.descripcion,
+        totalInsumos: this.totalCantidadPedido,
+        costoPedido: this.totalPedido,
       };
-      console.log(request, 'request');
       this.pedidoService.insertPedido(request).subscribe((res: any) => {
         this.getPedidos();
         this.modalRef.hide();
@@ -175,15 +194,13 @@ export class PedidosComponent implements OnInit {
     const control = <FormArray>this.pedidoForm.controls['insumos'];
     control.removeAt(1);
     this.pedidoForm.setValue({
-      idInsumo: '',
-      fechaPedido: '',
       idAdmin: '',
       idProveedor: '',
       descripcion: '',
-      cantInsumos: '',
       insumos: [{
         insumo: [],
-        cantidad: []
+        cantidad: [],
+        costo: []
       }]
     });
   }

@@ -127,6 +127,9 @@ export class PedidosComponent implements OnInit {
   }
 
   openModalEdition(template: TemplateRef<any>, pedido: any, $event: any) {
+    console.log(this.idPedido, ' this.idPedido');
+    console.log(pedido, 'pedido')
+    this.idPedido = pedido.idPedido;
     this.pedidoEditionForm.setValue({
       idProveedor: pedido.idProveedor,
       descripcion: pedido.descripcion,
@@ -154,8 +157,6 @@ export class PedidosComponent implements OnInit {
   }
 
   enviarFormulario() {
-    console.log(this.pedidoForm, 'this.pedidoForm.')
-    console.log(this.pedidoForm.valid, 'valido?')
     if (this.pedidoForm.valid) {
 
       this.totalCantidadYcostoInsumos();
@@ -206,15 +207,15 @@ export class PedidosComponent implements OnInit {
   }
 
   editarPedido() {
-    if (this.pedidoForm.valid) {
+    console.log(this.pedidoEditionForm, 'this.pedidoForm.')
+    console.log(this.pedidoEditionForm.valid, 'valido?')
+    if (this.pedidoEditionForm.valid) {
       const request = {
-        idInsumo: this.pedidoForm.value.idInsumo,
-        fechaPedido: this.pedidoForm.value.fechaPedido,
-        idAdmin: parseInt(this.pedidoForm.value.idAdmin),
-        idProveedor: parseInt(this.pedidoForm.value.idProveedor),
-        descripcion: this.pedidoForm.value.descripcion,
-        totalInsumos: parseInt(this.pedidoForm.value.totalInsumos),
-        costoPedido: parseFloat(this.pedidoForm.value.costoPedido),
+        idInsumo: this.nameAdministrador,
+        idProveedor: this.pedidoEditionForm.value.idProveedor,
+        descripcion: this.pedidoEditionForm.value.descripcion,
+        totalInsumos: parseInt(this.pedidoEditionForm.value.totalInsumos),
+        costoPedido: parseFloat(this.pedidoEditionForm.value.costoPedido),
       };
       const id = this.idPedido;
       this.pedidoService.updatePedido(request, id).subscribe((res: any) => {

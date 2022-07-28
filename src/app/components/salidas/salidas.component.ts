@@ -4,14 +4,16 @@ import { SalidaService } from 'src/app/services/salida.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { InsumoService } from 'src/app/services/insumo.service';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-salidas',
   templateUrl: './salidas.component.html',
   styleUrls: ['./salidas.component.scss']
 })
 export class SalidasComponent implements OnInit {
-
+  namePedido = '';
+  idSalida = 0;
   idAdmin: any;
   arrayInsumos: any;
   salidaForm: FormGroup;
@@ -28,8 +30,6 @@ export class SalidasComponent implements OnInit {
     return nameAdmin;
   }
   nameSalida = '';
-  idSalida = 0;
-
   modalRef!: BsModalRef;
   numeroSalida: any;
   arrayDetalleSalida: any;
@@ -64,7 +64,13 @@ export class SalidasComponent implements OnInit {
     this.getSalidas();
     this.limpiarFormulario();
     this.getListaInsumos();
+  }
 
+  public downloadPDF(): void {
+    const doc = new jsPDF();
+
+    doc.text('Hello world!', 10, 10);
+    doc.save('hello-world.pdf');
   }
 
   getSalidas() {
@@ -143,6 +149,13 @@ export class SalidasComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  modalEliminacion(template: TemplateRef<any>, salida: any, $event: any) {
+    this.namePedido = salida.idPedido;
+    this.idSalida = salida.idSalida;
+    $event && $event.stopPropagation();
+    this.modalRef = this.modalService.show(template);
+  }
+
   enviarFormulario() {
     if (this.salidaForm.valid) {
       this.totalCantidadYcostoInsumos();
@@ -150,7 +163,7 @@ export class SalidasComponent implements OnInit {
         administrador: this.nameAdministrador,
         manufactura: this.salidaForm.value.idManufactura,
         totalInsumos: this.totalCantidadPedido,
-        costoSalida: this.totalPedido ,
+        costoSalida: this.totalPedido,
       };
       this.salidaService.insertSalida(request).subscribe((res: any) => {
         this.getSalidas();

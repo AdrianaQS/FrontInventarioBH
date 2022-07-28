@@ -41,7 +41,7 @@
               | paginate: { itemsPerPage: 5, currentPage: page }
           ">
           <th scope="row">{{ pedido.idPedido }}</th>
-          <td scope="row">{{ pedido.fecha | date: "shortDate" }}</td>
+          <td scope="row">{{ pedido.fecha | date:'dd/MM/yy HH:mm'}}</td>
           <td scope="row">{{ pedido.administrador }}</td>
           <td scope="row">{{ pedido.proveedor }}</td>
           <td scope="row">{{ pedido.descripcion }}</td>

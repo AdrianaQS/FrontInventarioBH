@@ -41,7 +41,7 @@
           <th scope="row">{{salida.idSalida}}</th>
           <th scope="row">{{salida.nombreAdmin}}</th>
           <th scope="row">{{salida.nombreManufactura}}</th>
-          <td scope="row">{{salida.fecha }}</td>
+          <td scope="row">{{salida.fecha | date:'dd/MM/yy HH:mm'}}</td>
           <td scope="row"> {{salida.totalInsumos}}</td>
           <td scope="row">S/. {{salida.costoSalida}}</td>
           <td class="p-3">

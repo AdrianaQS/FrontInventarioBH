@@ -22,7 +22,7 @@
         />
       </svg>
     </button>
-    <button class="m-1 btn btn-danger" (click)="downloadPDF()">
+    <button class="m-1 btn btn-danger" (click)="onGenerarReporte()">
       Reporte<svg
         class="reporte"
         xmlns="http://www.w3.org/2000/svg"
@@ -138,7 +138,11 @@
                 />
               </svg>
             </button>
-            <button class="accion" title="Descargar PDF">
+            <button
+              class="accion"
+              title="Descargar PDF"
+              (click)="onGenerarReporteDetalle(pedido)"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="bi bi-file-pdf file"

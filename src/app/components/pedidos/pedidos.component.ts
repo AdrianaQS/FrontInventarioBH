@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { InsumoService } from 'src/app/services/insumo.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ReportesService } from 'src/app/services/reportes.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -51,6 +52,7 @@ export class PedidosComponent implements OnInit {
     private modalService: BsModalService,
     private fb: FormBuilder,
     private insumoService: InsumoService,
+    private reportesService: ReportesService
   ) {
     this.totalPedido = 0;
     this.disableCheckbox = true;
@@ -295,5 +297,77 @@ export class PedidosComponent implements OnInit {
   public nextPageModal() {
     this.modalPage++;
   }
+
+  onGenerarReporte() {
+    const data = this.arrayPedidos;
+    // console.log(data);
+    let newData: any = [];
+    data.forEach((pedido: any) => {
+      const { fecha, administrador, proveedor, descripcion, totalInsumos, costoPedido, estado } = pedido;
+
+      const f = new Date(fecha);
+      const dia = f.getDate();
+      const mes = f.getMonth() + 1; // Los meses en JavaScript son base 0
+      const año = f.getFullYear();
+
+      const newFecha = `${dia}/${mes}/${año}`;
+
+      const preData = [newFecha, administrador, proveedor, descripcion, totalInsumos, costoPedido, estado];
+
+      newData.push(preData);
+    });
+    console.log(newData);
+
+    const encabezado = ['Fecha Pedido', 'Administrador', 'Proveedor', 'Descripcion', 'Total insumos', 'Costo pedido', 'Estado'];
+    const cuerpo = newData;
+    // const cuerpo = [newData];
+
+    const titulo = 'Reporte de Pedidos';
+    this.reportesService.reporteGeneral(encabezado, cuerpo, titulo, "insumos", true);
+  }
+
+
+  onGenerarReporteDetalle(pedido: any) {
+
+    this.numeroPedido = pedido.idPedido;
+    const idPedido = this.numeroPedido;
+    const fechaPedido = pedido.fecha;
+
+    const f = new Date(fechaPedido);
+    const dia = f.getDate();
+    const mes = f.getMonth() + 1; // Los meses en JavaScript son base 0
+    const año = f.getFullYear();
+
+    const newFecha = `${dia}/${mes}/${año}`;
+
+    const administrador = pedido.administrador;
+    const proveedor = pedido.proveedor;
+
+
+    this.pedidoService.getDetallePedido(this.numeroPedido).subscribe((res: any) => {
+      this.arrayDetallePedido = res;
+    });
+
+    const data = this.arrayDetallePedido;
+
+    let newData: any = [];
+
+    data.forEach((detallePedido: any) => {
+      const { nombreInsumo, costoInsumo, cantidadPedido, costoDetalle } = detallePedido;
+
+      const preData = [newFecha, administrador, proveedor, nombreInsumo, `S/ ${costoInsumo}`, `${cantidadPedido} KG`, `S/ ${costoDetalle}`];
+
+      newData.push(preData);
+    });
+    console.log(newData);
+
+    const encabezado = ['Fecha Pedido', 'Administrador', 'Proveedor', 'Nombre Insumo', 'Costo Insumo', 'Cantidad', 'Costo Detalle'];
+    const cuerpo = newData;
+    // const cuerpo = [newData];
+
+    const titulo = `Reporte de Detalle Pedido #${idPedido}`;
+    this.reportesService.reporteGeneral(encabezado, cuerpo, titulo, "detalle_pedido", true);
+  }
+
 
 }

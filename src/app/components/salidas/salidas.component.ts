@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { InsumoService } from 'src/app/services/insumo.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ReportesService } from 'src/app/services/reportes.service';
 @Component({
   selector: 'app-salidas',
   templateUrl: './salidas.component.html',
@@ -43,6 +44,7 @@ export class SalidasComponent implements OnInit {
     private modalService: BsModalService,
     private insumoService: InsumoService,
     private fb: FormBuilder,
+    private reportesService: ReportesService
   ) {
 
     this.totalPedido = 0;
@@ -228,6 +230,76 @@ export class SalidasComponent implements OnInit {
       this.modalRef.hide();
       this.idSalida = 0;
     });
+  }
+
+  transformFecha(fecha: any) {
+    const f = new Date(fecha);
+    const dia = f.getDate();
+    const mes = f.getMonth() + 1; // Los meses en JavaScript son base 0
+    const año = f.getFullYear();
+
+    return `${dia}/${mes}/${año}`;
+  }
+
+  onGenerarReporte() {
+    const data = this.arraySalidas;
+    // console.log(data);
+    let newData: any = [];
+    data.forEach((salida: any) => {
+      const { fecha, nombreAdmin, nombreManufactura, totalInsumos, costoSalida } = salida;
+
+      const newFecha = this.transformFecha(fecha);
+
+      const preData = [newFecha, nombreAdmin, nombreManufactura, totalInsumos, `S/ ${costoSalida}`];
+
+      newData.push(preData);
+    });
+    console.log(newData);
+
+    const encabezado = ['Fecha', 'Administrador', 'Manufactura', 'Total Insumos', 'Costo Salida'];
+    const cuerpo = newData;
+    // const cuerpo = [newData];
+
+    const titulo = 'Reporte de Salidas';
+    this.reportesService.reporteGeneral(encabezado, cuerpo, titulo, "salidas", true);
+  }
+
+  onGenerarReporteDetalle(salida: any) {
+
+    console.log(salida.idSalida);
+    this.numeroSalida = salida.idSalida;
+    const idSalida = salida.idSalida;
+    const fecha = salida.fecha;
+
+    const newFecha = this.transformFecha(fecha);
+
+    const administrador = salida.nombreAdmin;
+    const manufactura = salida.nombreManufactura;
+    const costoSalida = salida.costoSalida;
+
+    this.salidaService.getDetalleSalida(11).subscribe((res: any) => {
+      this.arrayDetalleSalida = res;
+    });
+
+    const data = this.arrayDetalleSalida;
+    console.log(data);
+
+    let newData: any = [];
+
+    data.forEach((detalleSalida: any) => {
+      const { nombreInsumo, costoInsumo, cantidadSalida, costoDetalle } = detalleSalida;
+
+      const preData = [newFecha, administrador, manufactura, `S/ ${costoSalida}`, nombreInsumo, `S/ ${costoInsumo}`, `${cantidadSalida} KG`, `S/ ${costoDetalle}`];
+      newData.push(preData);
+    });
+    console.log(newData);
+
+    const encabezado = ['Fecha', 'Administrador', 'Manufactura', 'Costo Salida', 'Nombre Insumo', 'Costo Insumo', 'Cantidad', 'Costo Detalle'];
+    const cuerpo = newData;
+    // const cuerpo = [newData];
+
+    const titulo = `Reporte de Detalle Salida #${idSalida}`;
+    this.reportesService.reporteGeneral(encabezado, cuerpo, titulo, "detalle_salida", true);
   }
 
 }

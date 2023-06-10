@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InsumoService } from 'src/app/services/insumo.service';
+import { ReportesService } from 'src/app/services/reportes.service';
 
 @Component({
   selector: 'app-insumos',
@@ -23,8 +24,9 @@ export class InsumosComponent implements OnInit {
   arrayInsumos: any;
   constructor(
     private insumoService: InsumoService,
-    private modalService: BsModalService
-  ) {}
+    private modalService: BsModalService,
+    private reportesService: ReportesService
+  ) { }
 
   ngOnInit(): void {
     this.getInsumos();
@@ -123,5 +125,24 @@ export class InsumosComponent implements OnInit {
       this.modalRef.hide();
       this.idInsumo = 0;
     });
+  }
+
+  onGenerarReporte() {
+    const data = this.arrayInsumos;
+    // console.log(data);
+    let newData: any = [];
+    data.forEach((insumo: any) => {
+      const { nombreInsumo, descripcion, stock, costo, idCategoria } = insumo;
+      const preData = [nombreInsumo, descripcion, `${stock} KG`, `S/ ${costo}`, (idCategoria == 1) ? 'METALICO' : 'NO METALICO'];
+      newData.push(preData);
+    });
+    console.log(newData);
+
+    const encabezado = ['Nombre', 'Descripcion', 'Stock', 'Costo', 'Categoria'];
+    const cuerpo = newData;
+    // const cuerpo = [newData];
+
+    const titulo = 'Reporte de Insumos';
+    this.reportesService.reporteGeneral(encabezado, cuerpo, titulo, "insumos", true);
   }
 }

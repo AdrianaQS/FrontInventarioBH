@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProveedorService } from 'src/app/services/proveedor.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ReportesService } from 'src/app/services/reportes.service';
 
 @Component({
   selector: 'app-proveedores',
@@ -26,6 +27,7 @@ export class ProveedoresComponent implements OnInit {
   constructor(
     private proveedorService: ProveedorService,
     private modalService: BsModalService,
+    private reportesService: ReportesService
   ) { }
 
   ngOnInit(): void {
@@ -123,6 +125,24 @@ export class ProveedoresComponent implements OnInit {
       this.modalRef.hide();
       this.idProveedor = 0;
     });
+  }
+
+  onGenerarReporte() {
+    const data = this.arrayProveedores;
+    let newData: any = [];
+    data.forEach((proveedor: any) => {
+      const { nombreProveedor, ruc, telefono, ciudad, direccion } = proveedor;
+      const preData = [nombreProveedor, ruc, telefono, ciudad, direccion];
+      newData.push(preData);
+    });
+    console.log(newData);
+
+    const encabezado = ['Nombre', 'RUC', 'Telefono', 'Ciudad', 'Direccion'];
+    const cuerpo = newData;
+    // const cuerpo = [newData];
+
+    const titulo = 'Reporte de Proveedores';
+    this.reportesService.reporteGeneral(encabezado, cuerpo, titulo, "proveedores", true);
   }
 
 }

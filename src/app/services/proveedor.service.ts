@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { jsPDF } from "jspdf"
 
 @Injectable({
   providedIn: 'root',
@@ -19,10 +20,11 @@ export class ProveedorService {
   }
 
   deleteProveedor(request: any, id: any) {
-    return this.http.delete(`${this.API}/proveedores/`+ id, request);
+    return this.http.delete(`${this.API}/proveedores/` + id, request);
   }
 
   updateProveedor(request: any, id: any) {
-    return this.http.put(`${this.API}/proveedores/`+ id, request);
+    return this.http.put(`${this.API}/proveedores/` + id, request);
   }
+
 }

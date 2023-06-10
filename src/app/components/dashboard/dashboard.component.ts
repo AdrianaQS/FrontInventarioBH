@@ -11,7 +11,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class DashboardComponent implements OnInit {
   modalRef!: BsModalRef;
 
-  constructor(private router: Router, private modalService: BsModalService) {}
+  constructor(private router: Router, private modalService: BsModalService) { }
 
   ngOnInit() {
     //this.welcomeTest();
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
   goToSalida() {
     this.router.navigate(['/inventario/salidas']);
   }
-  openModal(template: TemplateRef<any>,dashboard: any, $event: any) {
+  openModal(template: TemplateRef<any>, dashboard: any, $event: any) {
     $event && $event.stopPropagation();
     this.modalRef = this.modalService.show(template);
   }

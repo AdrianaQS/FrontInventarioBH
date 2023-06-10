@@ -36,7 +36,7 @@
       <thead class="align-middle">
         <tr>
           <th class="p-3" scope="col">Nombre</th>
-          <th class="p-3" scope="col">Ruc</th>
+          <th class="p-3" scope="col">RUC</th>
           <th class="p-3" scope="col">Teléfono</th>
           <th class="p-3" scope="col">Ciudad</th>
           <th class="p-3" scope="col">Dirección</th>
@@ -47,7 +47,7 @@
         <tr
           *ngFor="
             let proveedor of arrayProveedores
-              | paginate: { itemsPerPage: 5, currentPage: page }
+              | paginate : { itemsPerPage: 5, currentPage: page }
           "
         >
           <td class="p-3">{{ proveedor.nombreProveedor }}</td>
@@ -126,7 +126,7 @@
         formControlName="inputRuc"
         maxlength="20"
         class="form-control"
-        placeholder="ruc"
+        placeholder="RUC"
       />
       <br />
       <label>Ingrese el telefono:</label>
@@ -134,7 +134,7 @@
         formControlName="inputTelefono"
         maxlength="9"
         class="form-control"
-        placeholder="telefono"
+        placeholder="Telefono"
       />
       <br />
       <label>Ingrese la direccion:</label>
@@ -142,7 +142,7 @@
         formControlName="inputDirecion"
         maxlength="70"
         class="form-control"
-        placeholder="direccion"
+        placeholder="Direccion"
       />
       <br />
       <label>Ingrese la ciudad:</label>
@@ -150,7 +150,7 @@
         formControlName="inputCiudad"
         maxlength="100"
         class="form-control"
-        placeholder="ciudad"
+        placeholder="Ciudad"
       />
     </form>
   </div>
@@ -200,7 +200,7 @@
         formControlName="inputRuc"
         maxlength="20"
         class="form-control"
-        placeholder="ruc"
+        placeholder="RUC"
       />
       <br />
       <label>Ingrese el telefono:</label>
@@ -208,7 +208,7 @@
         formControlName="inputTelefono"
         maxlength="9"
         class="form-control"
-        placeholder="telefono"
+        placeholder="Telefono"
       />
       <br />
       <label>Ingrese la direccion:</label>
@@ -217,7 +217,7 @@
         minlength="2"
         maxlength="70"
         class="form-control"
-        placeholder="direccion"
+        placeholder="DirecciÓn"
       />
       <br />
       <label>Ingrese la ciudad:</label>
@@ -225,7 +225,7 @@
         formControlName="inputCiudad"
         maxlength="100"
         class="form-control"
-        placeholder="ciudad"
+        placeholder="Ciudad"
       />
     </form>
   </div>

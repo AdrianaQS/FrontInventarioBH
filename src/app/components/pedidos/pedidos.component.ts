@@ -42,6 +42,10 @@ export class PedidosComponent implements OnInit {
   arrayPedidos: any;
   numeroPedido: any;
   public page: any;
+  public tablePage: number = 1;
+  public modalPage: number = 1;
+
+
   constructor(
     private pedidoService: PedidoService,
     private modalService: BsModalService,
@@ -282,6 +286,14 @@ export class PedidosComponent implements OnInit {
         docResult.save(`${new Date().toISOString()}_tutorial.pdf`);
       });
     }
+  }
+
+  public nextPageTable() {
+    this.tablePage++;
+  }
+
+  public nextPageModal() {
+    this.modalPage++;
   }
 
 }

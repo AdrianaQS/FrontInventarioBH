@@ -52,7 +52,7 @@
           <tr
             *ngFor="
               let insumo of arrayInsumos
-                | paginate: { itemsPerPage: 5, currentPage: page }
+                | paginate : { itemsPerPage: 5, currentPage: page }
             "
           >
             <td class="p-3">{{ insumo.nombreInsumo }}</td>
@@ -131,14 +131,14 @@
       <input
         formControlName="descripcion"
         class="form-control"
-        placeholder="descripcion"
+        placeholder="Descripción"
       />
       <br />
       <label>Ingrese el stock:</label>
-      <input formControlName="stock" class="form-control" placeholder="stock" />
+      <input formControlName="stock" class="form-control" placeholder="Stock" />
       <br />
       <label>Ingrese el costo:</label>
-      <input formControlName="costo" class="form-control" placeholder="costo" />
+      <input formControlName="costo" class="form-control" placeholder="Costo" />
       <br />
       <label>Seleccione la categoria: </label>
       <select
@@ -195,14 +195,14 @@
       <input
         formControlName="descripcion"
         class="form-control"
-        placeholder="descripcion"
+        placeholder="Descripción"
       />
       <br />
       <label>Ingrese el stock:</label>
-      <input formControlName="stock" class="form-control" placeholder="stock" />
+      <input formControlName="stock" class="form-control" placeholder="Stock" />
       <br />
       <label>Ingrese el costo:</label>
-      <input formControlName="costo" class="form-control" placeholder="costo" />
+      <input formControlName="costo" class="form-control" placeholder="Costo" />
       <br />
       <label>Seleccione la categoria: </label>
       <select class="form-control" formControlName="idCategoria">

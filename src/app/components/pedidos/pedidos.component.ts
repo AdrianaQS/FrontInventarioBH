@@ -24,6 +24,7 @@ export class PedidosComponent implements OnInit {
   pedidoEditionForm: FormGroup;
   totalPedido: number;
   totalCantidadPedido: number;
+
   nameAdmin(): string {
     const token: any = localStorage.getItem('token');
 

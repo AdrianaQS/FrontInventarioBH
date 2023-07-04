@@ -6,7 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class AuthService {
-  private API = 'http://localhost:5000/api';
+  private API = 'https://backend-bh.onrender.com/api';
 
   //Inicializacion del modulo
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}

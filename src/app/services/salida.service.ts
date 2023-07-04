@@ -6,7 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class SalidaService {
-  private API = 'http://localhost:5000/api';
+  private API = 'https://backend-bh.onrender.com/api';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 

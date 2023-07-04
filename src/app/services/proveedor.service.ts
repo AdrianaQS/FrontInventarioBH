@@ -7,7 +7,7 @@ import { jsPDF } from "jspdf"
   providedIn: 'root',
 })
 export class ProveedorService {
-  private API = 'http://localhost:5000/api';
+  private API = 'https://backend-bh.onrender.com/api';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 

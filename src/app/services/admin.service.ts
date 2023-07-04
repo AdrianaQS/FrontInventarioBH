@@ -7,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AdminService {
 
-  private API = 'http://localhost:5000/api';
+  private API = 'https://backend-bh.onrender.com/api';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 

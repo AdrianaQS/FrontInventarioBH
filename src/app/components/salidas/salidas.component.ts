@@ -24,9 +24,9 @@ export class SalidasComponent implements OnInit {
     const token: any = localStorage.getItem('token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
-    this.nameAdministrador = decodedToken.nombreAdmin;
-    const nameAdmin = decodedToken.nombreAdmin;
-    this.idAdmin = decodedToken.idAdmin;
+    this.nameAdministrador = decodedToken[0].nombreAdmin;
+    const nameAdmin = decodedToken[0].nombreAdmin;
+    this.idAdmin = decodedToken[0].idAdmin;
     //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
     return nameAdmin;
   }

@@ -31,8 +31,9 @@ export class SidenavComponent implements OnInit {
     const token: any = localStorage.getItem('token');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
-    const nameAdmin = decodedToken.nombreAdmin;
-    //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
+    const nameAdmin = decodedToken[0].nombreAdmin;
+
+    // console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
     return nameAdmin;
   }
 

@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class SalidaService {
   private API = 'https://backend-bh.onrender.com/api';
+  // private API = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
@@ -15,7 +16,7 @@ export class SalidaService {
   }
 
   getDetalleSalida(id: any) {
-    return this.http.get(`${this.API}/detalleSalida/`+ id);
+    return this.http.get(`${this.API}/detalleSalida/` + id);
   }
 
   insertSalida(request: any) {
@@ -23,11 +24,11 @@ export class SalidaService {
   }
 
   deleteSalida(request: any, id: any) {
-    return this.http.delete(`${this.API}/salida/`+ id, request);
+    return this.http.delete(`${this.API}/salida/` + id, request);
   }
 
   updateSalida(request: any, id: any) {
-    return this.http.put(`${this.API}/salida/`+ id, request);
+    return this.http.put(`${this.API}/salida/` + id, request);
   }
 
 }

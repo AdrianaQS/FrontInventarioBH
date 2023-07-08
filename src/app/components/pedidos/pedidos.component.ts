@@ -30,9 +30,9 @@ export class PedidosComponent implements OnInit {
 
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
-    const nameAdmin = decodedToken.nombreAdmin;
-    this.nameAdministrador = decodedToken.nombreAdmin;
-    this.idAdmin = decodedToken.idAdmin;
+    const nameAdmin = decodedToken[0].nombreAdmin;
+    this.nameAdministrador = decodedToken[0].nombreAdmin;
+    this.idAdmin = decodedToken[0].idAdmin;
     //console.log(`Bienvenid@ ${decodedToken.nombreAdmin}`);
     return nameAdmin;
   }
@@ -178,6 +178,8 @@ export class PedidosComponent implements OnInit {
         this.getPedidos();
         this.modalRef.hide();
       });
+      console.log(request);
+      
     } else {
       window.alert('Error en el formulario');
     }

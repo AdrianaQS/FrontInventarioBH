@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class PedidoService {
   private API = 'https://backend-bh.onrender.com/api';
+  // private API = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
@@ -15,11 +16,11 @@ export class PedidoService {
   }
 
   getPedidoU(id: any) {
-    return this.http.get(`${this.API}/pedido/`+ id);
+    return this.http.get(`${this.API}/pedido/` + id);
   }
 
   getDetallePedido(id: any) {
-    return this.http.get(`${this.API}/detallePedido/`+ id);
+    return this.http.get(`${this.API}/detallePedido/` + id);
   }
 
   insertPedido(request: any) {
@@ -27,11 +28,11 @@ export class PedidoService {
   }
 
   deletePedido(request: any, id: any) {
-    return this.http.delete(`${this.API}/pedido/`+ id, request);
+    return this.http.delete(`${this.API}/pedido/` + id, request);
   }
 
   updatePedido(request: any, id: any) {
-    return this.http.put(`${this.API}/pedido/`+ id, request);
+    return this.http.put(`${this.API}/pedido/` + id, request);
   }
 
   recibirPedidoRegistrarEntrada(request: any) {
